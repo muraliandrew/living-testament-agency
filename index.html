@@ -3,118 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Living Testament Agency</title>
+  <title>Cleaning Service</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1 id="companyName">Living Testament Agency</h1>
-    <p id="slogan">Trusted Sourcing of Domestic Workers</p>
-    <p id="registryDetails">MOM License: 22C0928 | EA Reg No: R22105546</p>
+    <h1 id="companyName">Company Name</h1>
+    <p id="slogan">Slogan goes here</p>
   </header>
 
-  <nav>
-    <a href="#" class="tablink active" onclick="openTab(event, 'about')">About</a>
-    <a href="#" class="tablink" onclick="openTab(event, 'jobs')">Jobs</a>
-    <a href="#" class="tablink" onclick="openTab(event, 'enquiry')">Enquiry</a>
-  </nav>
+  <section id="about">
+    <h2>About Us</h2>
+    <p id="aboutCompany">Loading company info...</p>
+  </section>
 
-  <main class="container">
-    <!-- About Section -->
-    <section id="about" class="tabcontent active">
-      <h2>About Us</h2>
-      <p id="aboutCompany">
-        We are a licensed employment agency committed to sourcing and placing reliable workers
-        from various countries to Singapore households and businesses.
-      </p>
-      <div class="contact-box">
-        <p><strong>Email:</strong> <span id="emailAddress">livingtestamentagency@gmail.com</span></p>
-        <p><strong>Phone:</strong> <span id="contactNumber">+65 80334490</span></p>
-        <p><strong>WhatsApp:</strong> <span id="whatsapp">+65 80334490</span></p>
-        <p><strong>Address:</strong> <span id="address">31 Campbell Lane, Singapore 209903</span></p>
-        <p><strong>Owner:</strong> <span id="owner">Murali Andrew, PBM</span> (<span id="role">Managing Director</span>)</p>
-      </div>
-    </section>
+  <section id="jobs">
+    <h2>Jobs</h2>
+    <p>Open positions will appear here when available.</p>
+  </section>
 
-    <!-- Jobs Section -->
-    <section id="jobs" class="tabcontent">
-      <h2>Available Jobs</h2>
-      <table id="jobsTable">
-        <thead>
-          <tr>
-            <th>Job ID</th>
-            <th>Position</th>
-            <th>Worker Country</th>
-            <th>Gender</th>
-            <th>Age Range</th>
-            <th>Salary (SGD)</th>
-            <th>Accommodation</th>
-            <th>Rest Day</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Job rows will be dynamically loaded -->
-          <tr>
-            <td>J001</td>
-            <td>Domestic Helper</td>
-            <td>Indonesia</td>
-            <td>Female</td>
-            <td>25-40</td>
-            <td>1200</td>
-            <td>Provided</td>
-            <td>Yes</td>
-            <td>General housekeeping, childcare experience preferred.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Enquiry Section -->
-    <section id="enquiry" class="tabcontent">
-      <h2>Enquiry Form</h2>
-      <form id="enquiryForm">
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" name="fullName" required>
-
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="phone">Phone Number</label>
-        <input type="text" id="phone" name="phone" required>
-
-        <label for="enquiryType">Enquiry Type</label>
-        <select id="enquiryType" name="enquiryType" required>
-          <option value="">-- Select --</option>
-          <option value="Hiring">Hiring a Worker</option>
-          <option value="Becoming a Worker">Becoming a Worker</option>
-          <option value="General">General Enquiry</option>
-        </select>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <button type="submit">Submit Enquiry</button>
-      </form>
-    </section>
-  </main>
+  <section id="enquiries">
+    <h2>Enquiries</h2>
+    <p>Email: <span id="emailAddress"></span></p>
+    <p>WhatsApp: <span id="whatsapp"></span></p>
+    <p>Phone: <span id="contactNumber"></span></p>
+    <p>Address: <span id="address"></span></p>
+  </section>
 
   <footer>
-    <p id="footer">© 2025 Living Testament Agency. All rights reserved.</p>
+    <p id="footer">© 2025 Cleaning Service. All rights reserved.</p>
   </footer>
-
-  <script>
-    // Tab switching logic
-    function openTab(evt, tabName) {
-      const tabcontent = document.querySelectorAll(".tabcontent");
-      const tablinks = document.querySelectorAll(".tablink");
-
-      tabcontent.forEach(tab => tab.classList.remove("active"));
-      tablinks.forEach(link => link.classList.remove("active"));
-
-      document.getElementById(tabName).classList.add("active");
-      evt.currentTarget.classList.add("active");
-    }
-  </script>
 </body>
 </html>
