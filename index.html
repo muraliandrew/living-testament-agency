@@ -3,35 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cleaning Service</title>
+  <title>Living Testament Agency – About</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <nav>
+    <a href="index.html" class="active">About</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="enquiry.html">Enquiry</a>
+  </nav>
+
   <header>
-    <h1 id="companyName">Company Name</h1>
-    <p id="slogan">Slogan goes here</p>
+    <h1 id="companyName">Loading...</h1>
+    <p id="slogan"></p>
   </header>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p id="aboutCompany">Loading company info...</p>
-  </section>
-
-  <section id="jobs">
-    <h2>Jobs</h2>
-    <p>Open positions will appear here when available.</p>
-  </section>
-
-  <section id="enquiries">
-    <h2>Enquiries</h2>
-    <p>Email: <span id="emailAddress"></span></p>
-    <p>WhatsApp: <span id="whatsapp"></span></p>
-    <p>Phone: <span id="contactNumber"></span></p>
-    <p>Address: <span id="address"></span></p>
-  </section>
+  <main class="container">
+    <section id="aboutSection">
+      <h2>About Us</h2>
+      <p id="aboutCompany">Loading company info...</p>
+      <p><strong>Registry Details:</strong> <span id="registryDetails"></span></p>
+      <p><strong>Email:</strong> <span id="emailAddress"></span></p>
+      <p><strong>WhatsApp:</strong> <span id="whatsapp"></span></p>
+      <p><strong>Contact Number:</strong> <span id="contactNumber"></span></p>
+      <p><strong>Address:</strong> <span id="address"></span></p>
+      <p><strong>Owner:</strong> <span id="owner"></span> (<span id="role"></span>)</p>
+    </section>
+  </main>
 
   <footer>
-    <p id="footer">© 2025 Cleaning Service. All rights reserved.</p>
+    <p id="footer">© 2025 Living Testament Agency. All rights reserved.</p>
   </footer>
+
+  <script>
+    const SHEET_API = "https://script.google.com/macros/s/AKfycbwZgSNxh8J-XXou0BIwCJ1s8qcoShpcV9hUJeNbQZxTIvl1n6wSdd2HCpz-tXWtId8t/exec";
+
+    fetch(SHEET_API + "?sheet=About")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          const info = data[0];
+          document.getElementById("companyName").textContent = info.CompanyName;
+          document.getElementById("slogan").textContent = info.Slogan;
+          document.getElementById("registryDetails").textContent = info.RegistryDetails;
+          document.getElementById("emailAddress").textContent = info.EmailAddress;
+          document.getElementById("whatsapp").textContent = info.Whatsapp;
+          document.getElementById("contactNumber").textContent = info.ContactNuimber;
+          document.getElementById("address").textContent = info.Address;
+          document.getElementById("owner").textContent = info.Owner;
+          document.getElementById("role").textContent = info.Role;
+          document.getElementById("footer").textContent = info.Footer;
+        }
+      })
+      .catch(err => console.error("Error fetching About sheet:", err));
+  </script>
 </body>
 </html>
