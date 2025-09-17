@@ -257,10 +257,25 @@
   <section id="enquiry">
     <h2>Send an Enquiry</h2>
     <form id="enquiryForm">
+      
       <input type="text" name="Full_Name" placeholder="Full Name" required>
+      
+      <input type="email" name="Email" placeholder="Email Address" required>
+      
       <input type="tel" name="Phone" placeholder="Phone Number" required>
-      <textarea name="Message" placeholder="Your enquiry..." required></textarea>
+      
+      <select name="Enquiry_Type" required>
+        <option value="" disabled selected>-- Select Enquiry Type --</option>
+        <option value="Domestic Helper">Domestic Helper Enquiry</option>
+        <option value="Office Cleaning">Office Cleaning Enquiry</option>
+        <option value="Hospitality Staff">Hospitality Staff Enquiry</option>
+        <option value="General Question">General Question</option>
+      </select>
+      
+      <textarea name="Message" placeholder="Your message..." required></textarea>
+      
       <button type="submit">Submit</button>
+      
     </form>
     <p id="enquiryStatus"></p>
   </section>
@@ -270,7 +285,7 @@
   </footer>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1PxfEgWhy0o1HNIUoteKeq_PGcuPqSHeTLBgO5vZ38mcbc3-u9Jq9v-ecGiawyCBU/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyw_6VvW5ehMubzVRjobPla5Z-VuG6gB9iP0wh9HJNb1fGvZEmE1IZbcOlh1huqSb1q/exec";
 
     async function loadData() {
       try {
