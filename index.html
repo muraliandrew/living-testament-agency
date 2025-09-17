@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Living Testament Agency – About</title>
+  <title>Living Testament Agency</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav>
-    <a href="index.html" class="active">About</a>
+    <a href="index.html">About</a>
     <a href="jobs.html">Jobs</a>
     <a href="enquiry.html">Enquiry</a>
   </nav>
@@ -16,46 +15,51 @@
   <header>
     <h1 id="companyName">Loading...</h1>
     <p id="slogan"></p>
+    <p id="registryDetails"></p>
   </header>
 
-  <main class="container">
-    <section id="aboutSection">
-      <h2>About Us</h2>
-      <p id="aboutCompany">Loading company info...</p>
-      <p><strong>Registry Details:</strong> <span id="registryDetails"></span></p>
-      <p><strong>Email:</strong> <span id="emailAddress"></span></p>
-      <p><strong>WhatsApp:</strong> <span id="whatsapp"></span></p>
-      <p><strong>Contact Number:</strong> <span id="contactNumber"></span></p>
-      <p><strong>Address:</strong> <span id="address"></span></p>
-      <p><strong>Owner:</strong> <span id="owner"></span> (<span id="role"></span>)</p>
-    </section>
-  </main>
+  <section>
+    <h2>About Us</h2>
+    <p id="aboutCompany"></p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p id="emailAddress"></p>
+    <p id="whatsapp"></p>
+    <p id="phone"></p>
+    <p id="address"></p>
+    <p id="owner"></p>
+    <p id="role"></p>
+  </section>
 
   <footer>
-    <p id="footer">© 2025 Living Testament Agency. All rights reserved.</p>
+    <p id="footer"></p>
   </footer>
 
   <script>
-    const SHEET_API = "https://script.google.com/macros/s/AKfycbwZgSNxh8J-XXou0BIwCJ1s8qcoShpcV9hUJeNbQZxTIvl1n6wSdd2HCpz-tXWtId8t/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbxO_2mq7BSe48_z029NuP2SRe87UUZUnUyiVk98yZCIazwU3QOxEOH7m484T7Uhc-5n/exec?sheet=About";
 
-    fetch(SHEET_API + "?sheet=About")
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.length > 0) {
-          const info = data[0];
-          document.getElementById("companyName").textContent = info.CompanyName;
-          document.getElementById("slogan").textContent = info.Slogan;
-          document.getElementById("registryDetails").textContent = info.RegistryDetails;
-          document.getElementById("emailAddress").textContent = info.EmailAddress;
-          document.getElementById("whatsapp").textContent = info.Whatsapp;
-          document.getElementById("contactNumber").textContent = info.ContactNuimber;
-          document.getElementById("address").textContent = info.Address;
-          document.getElementById("owner").textContent = info.Owner;
-          document.getElementById("role").textContent = info.Role;
-          document.getElementById("footer").textContent = info.Footer;
-        }
-      })
-      .catch(err => console.error("Error fetching About sheet:", err));
+    async function loadAbout() {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      const info = data[0];
+
+      document.getElementById("companyName").textContent = info.CompanyName;
+      document.getElementById("slogan").textContent = info.Slogan;
+      document.getElementById("registryDetails").textContent = info.RegistryDetails;
+      document.getElementById("aboutCompany").textContent = info.AboutCompany;
+
+      document.getElementById("emailAddress").textContent = "Email: " + info.EmailAddress;
+      document.getElementById("whatsapp").textContent = "WhatsApp: " + info.Whatsapp;
+      document.getElementById("phone").textContent = "Phone: " + info.ContactNuimber;
+      document.getElementById("address").textContent = "Address: " + info.Address;
+      document.getElementById("owner").textContent = "Owner: " + info.Owner;
+      document.getElementById("role").textContent = "Role: " + info.Role;
+      document.getElementById("footer").textContent = info.Footer;
+    }
+
+    loadAbout();
   </script>
 </body>
 </html>
