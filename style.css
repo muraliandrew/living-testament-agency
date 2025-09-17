@@ -1,68 +1,174 @@
-body {
-  font-family: Arial, sans-serif;
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
+body {
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navbar */
 header {
-  background: #2b6777;
+  background: #004080;
   color: white;
-  padding: 15px;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-header nav a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
-}
-
-section {
-  padding: 20px;
-}
-
-.job-card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 6px;
-  background: #f9f9f9;
-}
-
-button {
-  background: #2b6777;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button:hover {
-  background: #1d4d57;
-}
-
-.modal {
-  display: none;
-  position: fixed;
+  position: sticky;
+  top: 0;
   z-index: 1000;
-  left: 0; top: 0;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+nav a {
+  color: white;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  background: url('https://images.unsplash.com/photo-1581579186985-2c196efb31b8?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 5rem 2rem;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.5);
 }
 
-.modal-content {
-  background: white;
-  margin: 10% auto;
-  padding: 20px;
-  width: 400px;
-  border-radius: 8px;
+.hero h2, .hero p {
+  position: relative;
+  z-index: 1;
 }
 
-#closeModal {
-  float: right;
-  font-size: 20px;
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* About Section */
+.about {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.about h3 {
+  color: #004080;
+  margin-bottom: 1rem;
+}
+
+/* Jobs Grid */
+.jobs {
+  max-width: 1100px;
+  margin: 3rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+.job-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
   cursor: pointer;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+}
+
+.job-card h4 {
+  color: #004080;
+  margin-bottom: 0.5rem;
+}
+
+.job-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Enquiry Form */
+.enquiry-form {
+  max-width: 600px;
+  margin: 3rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.enquiry-form h3 {
+  color: #004080;
+  margin-bottom: 1rem;
+}
+
+.enquiry-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.enquiry-form input, 
+.enquiry-form textarea, 
+.enquiry-form select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.enquiry-form button {
+  background: #004080;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.enquiry-form button:hover {
+  background: #0066cc;
+}
+
+/* Footer */
+footer {
+  background: #004080;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
 }
