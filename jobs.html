@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jobs - Cleaning Service</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Available Jobs</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <nav>
+    <a href="index.html">About</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="enquiry.html">Enquiry</a>
+  </nav>
+
   <header>
-    <h1>Cleaning Service</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jobs.html" class="active">Jobs</a></li>
-        <li><a href="enquiries.html">Enquiries</a></li>
-      </ul>
-    </nav>
+    <h1>Available Jobs</h1>
   </header>
 
-  <main>
-    <h2>Job Application</h2>
-    <form method="POST" action="https://script.google.com/macros/s/AKfycbwZgSNxh8J-XXou0BIwCJ1s8qcoShpcV9hUJeNbQZxTIvl1n6wSdd2HCpz-tXWtId8t/exec">
-      <label for="name">Full Name:</label>
-      <input type="text" name="name" id="name" required />
+  <section id="jobList">
+    <p>Loading jobs...</p>
+  </section>
 
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" required />
+  <script>
+    const JOBS_API = "https://script.google.com/macros/s/AKfycbxO_2mq7BSe48_z029NuP2SRe87UUZUnUyiVk98yZCIazwU3QOxEOH7m484T7Uhc-5n/exec?sheet=Jobs";
 
-      <label for="phone">Phone:</label>
-      <input type="text" name="phone" id="phone" required />
+    async function loadJobs() {
+      const res = await fetch(JOBS_API);
+      const jobs = await res.json();
 
-      <label for="role">Role Applying For:</label>
-      <input type="text" name="role" id="role" required />
+      const container = document.getElementById("jobList");
+      container.innerHTML = "";
 
-      <label for="message">Additional Info:</label>
-      <textarea name="message" id="message"></textarea>
+      if (jobs.length === 0) {
+        container.innerHTML = "<p>No jobs available at the moment.</p>";
+        return;
+      }
 
-      <button type="submit">Submit Application</button>
-    </form>
-  </main>
+      jobs.forEach(job => {
+        const div = document.createElement("div");
+        div.className = "job-card";
+        div.innerHTML = `
+          <h3>${job.Title}</h3>
+          <p><strong>Location:</strong> ${job.Location}</p>
+          <p><strong>Salary:</strong> ${job.Salary}</p>
+          <p><strong>Description:</strong> ${job.Description}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
 
-  <footer>
-    <p>© 2025 Cleaning Service. All Rights Reserved.</p>
-  </footer>
+    loadJobs();
+  </script>
 </body>
 </html>
