@@ -1,174 +1,111 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
 body {
-  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9f9f9;
   color: #333;
-  line-height: 1.6;
 }
 
-/* Navbar */
 header {
-  background: #004080;
+  background: #0066cc;
   color: white;
-  padding: 1rem 2rem;
+  padding: 1rem;
+}
+
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
 }
 
-header h1 {
-  font-size: 1.5rem;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
 }
 
-nav a {
+.nav-links a {
   color: white;
-  margin-left: 1.5rem;
   text-decoration: none;
-  font-weight: 500;
 }
 
-nav a:hover {
-  text-decoration: underline;
-}
-
-/* Hero Section */
 .hero {
-  background: url('https://images.unsplash.com/photo-1581579186985-2c196efb31b8?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  color: white;
   text-align: center;
-  padding: 5rem 2rem;
-  position: relative;
+  padding: 3rem 1rem;
+  background: linear-gradient(120deg, #0066cc, #00cc88);
+  color: white;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
+section {
+  padding: 2rem 1rem;
 }
 
-.hero h2, .hero p {
-  position: relative;
-  z-index: 1;
-}
-
-.hero h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-/* About Section */
-.about {
-  max-width: 1100px;
-  margin: 3rem auto;
-  padding: 2rem;
-  background: white;
+.services, .testimonials {
+  background: #fff;
+  margin: 1rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
 }
 
-.about h3 {
-  color: #004080;
-  margin-bottom: 1rem;
+.service-grid {
+  display: flex;
+  gap: 1rem;
 }
 
-/* Jobs Grid */
-.jobs {
-  max-width: 1100px;
-  margin: 3rem auto;
+.service-card {
+  flex: 1;
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.testimonial-card {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  background: #f7f7f7;
+  border-left: 4px solid #0066cc;
+}
+
+.job-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 0 2rem;
+  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  gap: 1rem;
 }
 
 .job-card {
   background: white;
-  padding: 1.5rem;
-  border-radius: 10px;
+  border-radius: 6px;
+  padding: 1rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-  cursor: pointer;
 }
 
-.job-card:hover {
-  transform: translateY(-5px);
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 400px;
 }
 
-.job-card h4 {
-  color: #004080;
-  margin-bottom: 0.5rem;
-}
-
-.job-card p {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-/* Enquiry Form */
-.enquiry-form {
-  max-width: 600px;
-  margin: 3rem auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.enquiry-form h3 {
-  color: #004080;
-  margin-bottom: 1rem;
-}
-
-.enquiry-form label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: 500;
-}
-
-.enquiry-form input, 
-.enquiry-form textarea, 
-.enquiry-form select {
-  width: 100%;
-  padding: 0.8rem;
-  margin-top: 0.5rem;
+form input, form textarea, form button {
+  padding: 0.7rem;
+  border-radius: 4px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
 }
 
-.enquiry-form button {
-  background: #004080;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  margin-top: 1.5rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.enquiry-form button:hover {
+form button {
   background: #0066cc;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
-/* Footer */
+form button:hover {
+  background: #004999;
+}
+
 footer {
-  background: #004080;
-  color: white;
   text-align: center;
-  padding: 1.5rem;
-  margin-top: 3rem;
+  padding: 1rem;
+  background: #333;
+  color: white;
 }
