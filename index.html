@@ -2,61 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Living Testament Agency</title>
+  <title>Cleaning Service</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav>
-    <a href="index.html">About</a>
-    <a href="jobs.html">Jobs</a>
-    <a href="enquiry.html">Enquiry</a>
-  </nav>
-
+  <!-- Navbar -->
   <header>
-    <h1 id="companyName">Loading...</h1>
-    <p id="slogan"></p>
-    <p id="registryDetails"></p>
+    <h1 id="companyName"></h1>
+    <nav>
+      <a href="index.html">About</a>
+      <a href="jobs.html">Jobs</a>
+    </nav>
   </header>
 
-  <section>
-    <h2>About Us</h2>
+  <!-- About Section -->
+  <section id="about">
+    <h2 id="slogan"></h2>
     <p id="aboutCompany"></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+    <p><strong>Phone:</strong> <span id="phone"></span></p>
+    <p><strong>Whatsapp:</strong> <span id="whatsapp"></span></p>
+    <p><strong>Address:</strong> <span id="address"></span></p>
+    <footer id="footer"></footer>
   </section>
-
-  <section>
-    <h2>Contact</h2>
-    <p id="emailAddress"></p>
-    <p id="whatsapp"></p>
-    <p id="phone"></p>
-    <p id="address"></p>
-    <p id="owner"></p>
-    <p id="role"></p>
-  </section>
-
-  <footer>
-    <p id="footer"></p>
-  </footer>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxO_2mq7BSe48_z029NuP2SRe87UUZUnUyiVk98yZCIazwU3QOxEOH7m484T7Uhc-5n/exec?sheet=About";
+    const apiUrl = "https://script.google.com/macros/s/AKfycbw1BZnZ2fGTG9ES3riG15ni4bKLxL5B_LyyCzqZ2Ed6GVJEDwPytnwNRwCBHnxTeIT8/exec";
 
     async function loadAbout() {
-      const res = await fetch(API_URL);
+      const res = await fetch(apiUrl);
       const data = await res.json();
-      const info = data[0];
 
-      document.getElementById("companyName").textContent = info.CompanyName;
-      document.getElementById("slogan").textContent = info.Slogan;
-      document.getElementById("registryDetails").textContent = info.RegistryDetails;
-      document.getElementById("aboutCompany").textContent = info.AboutCompany;
-
-      document.getElementById("emailAddress").textContent = "Email: " + info.EmailAddress;
-      document.getElementById("whatsapp").textContent = "WhatsApp: " + info.Whatsapp;
-      document.getElementById("phone").textContent = "Phone: " + info.ContactNuimber;
-      document.getElementById("address").textContent = "Address: " + info.Address;
-      document.getElementById("owner").textContent = "Owner: " + info.Owner;
-      document.getElementById("role").textContent = "Role: " + info.Role;
-      document.getElementById("footer").textContent = info.Footer;
+      const about = data.about;
+      document.getElementById("companyName").textContent = about.CompanyName;
+      document.getElementById("slogan").textContent = about.Slogan;
+      document.getElementById("aboutCompany").textContent = about.AboutCompany;
+      document.getElementById("email").textContent = about.EmailAddress;
+      document.getElementById("phone").textContent = about.ContactNuimber;
+      document.getElementById("whatsapp").textContent = about.Whatsapp;
+      document.getElementById("address").textContent = about.Address;
+      document.getElementById("footer").textContent = about.Footer;
     }
 
     loadAbout();
