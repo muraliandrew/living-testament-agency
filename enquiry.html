@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enquiries - Cleaning Service</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Enquiry Form</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <nav>
+    <a href="index.html">About</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="enquiry.html">Enquiry</a>
+  </nav>
+
   <header>
-    <h1>Cleaning Service</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="enquiries.html" class="active">Enquiries</a></li>
-      </ul>
-    </nav>
+    <h1>Send Us Your Enquiry</h1>
   </header>
 
-  <main>
-    <h2>Service Enquiry</h2>
-    <form method="POST" action="https://script.google.com/macros/s/AKfycbxO_2mq7BSe48_z029NuP2SRe87UUZUnUyiVk98yZCIazwU3QOxEOH7m484T7Uhc-5n/exec">
-      <label for="name">Full Name:</label>
-      <input type="text" name="name" id="name" required />
+  <form id="enquiryForm">
+    <input type="text" name="Name" placeholder="Your Name" required>
+    <input type="email" name="Email" placeholder="Your Email" required>
+    <input type="text" name="Phone" placeholder="Phone Number">
+    <textarea name="Message" placeholder="Your Message" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
 
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" required />
+  <p id="formResponse"></p>
 
-      <label for="phone">Phone:</label>
-      <input type="text" name="phone" id="phone" required />
+  <script>
+    const ENQUIRY_API = "https://script.google.com/macros/s/AKfycbxO_2mq7BSe48_z029NuP2SRe87UUZUnUyiVk98yZCIazwU3QOxEOH7m484T7Uhc-5n/exec";
 
-      <label for="service">Service Required:</label>
-      <input type="text" name="service" id="service" required />
+    document.getElementById("enquiryForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const formData = Object.fromEntries(new FormData(form));
 
-      <label for="message">Details:</label>
-      <textarea name="message" id="message"></textarea>
+      const res = await fetch(ENQUIRY_API, {
+        method: "POST",
+        body: JSON.stringify(formData)
+      });
+      const result = await res.json();
 
-      <button type="submit">Submit Enquiry</button>
-    </form>
-  </main>
-
-  <footer>
-    <p>© 2025 Cleaning Service. All Rights Reserved.</p>
-  </footer>
+      document.getElementById("formResponse").textContent =
+        result.result === "success" ? "Enquiry submitted successfully!" : "Something went wrong.";
+      form.reset();
+    });
+  </script>
 </body>
 </html>
