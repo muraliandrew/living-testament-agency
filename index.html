@@ -2,49 +2,138 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cleaning Service</title>
+  <title>Living Testament Agency</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Navbar -->
+  <!-- Navigation -->
   <header>
-    <h1 id="companyName"></h1>
-    <nav>
-      <a href="index.html">About</a>
-      <a href="jobs.html">Jobs</a>
+    <nav class="navbar">
+      <div class="logo">Living Testament Agency</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#jobs">Jobs</a></li>
+        <li><a href="#enquiry">Enquiry</a></li>
+      </ul>
     </nav>
   </header>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2 id="slogan"></h2>
-    <p id="aboutCompany"></p>
-    <p><strong>Email:</strong> <span id="email"></span></p>
-    <p><strong>Phone:</strong> <span id="phone"></span></p>
-    <p><strong>Whatsapp:</strong> <span id="whatsapp"></span></p>
-    <p><strong>Address:</strong> <span id="address"></span></p>
-    <footer id="footer"></footer>
+  <!-- Hero -->
+  <section class="hero">
+    <h1 id="heroTitle">Welcome to Living Testament Agency</h1>
+    <p id="heroTagline">Sourcing trusted workers for Singapore</p>
   </section>
 
+  <!-- Services / Testimonials -->
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      <div class="service-card">✔️ Domestic Helpers</div>
+      <div class="service-card">✔️ Office Cleaners</div>
+      <div class="service-card">✔️ Hospitality Staff</div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Clients Say</h2>
+    <div class="testimonial-card">“Reliable and efficient service!” – Mrs Tan</div>
+    <div class="testimonial-card">“They helped us find the right helper quickly.” – Mr Lee</div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p id="aboutText"></p>
+    <p><strong>Email:</strong> <span id="contactEmail"></span></p>
+    <p><strong>Phone/WhatsApp:</strong> <span id="phone"></span></p>
+    <p><strong>Address:</strong> <span id="address"></span></p>
+    <p><strong>Owner:</strong> <span id="owner"></span> (<span id="role"></span>)</p>
+  </section>
+
+  <!-- Jobs -->
+  <section id="jobs">
+    <h2>Available Jobs</h2>
+    <div id="jobsList" class="job-grid">Loading jobs...</div>
+  </section>
+
+  <!-- Enquiry -->
+  <section id="enquiry">
+    <h2>Send an Enquiry</h2>
+    <form id="enquiryForm">
+      <input type="text" name="Full_Name" placeholder="Full Name" required>
+      <input type="tel" name="Phone" placeholder="Phone Number" required>
+      <textarea name="Message" placeholder="Your enquiry..." required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="enquiryStatus"></p>
+  </section>
+
+  <footer>
+    <p id="footerText"></p>
+  </footer>
+
   <script>
-    const apiUrl = "https://script.google.com/macros/s/AKfycbw1BZnZ2fGTG9ES3riG15ni4bKLxL5B_LyyCzqZ2Ed6GVJEDwPytnwNRwCBHnxTeIT8/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGdbeyjLO5f_uCxpg5kidR_11k_dOyQ-QCacRkncT5Ve83KwcD-7gDJ7ISe1rUvPlW/exec";
 
-    async function loadAbout() {
-      const res = await fetch(apiUrl);
-      const data = await res.json();
+    async function loadData() {
+      try {
+        const res = await fetch(APPS_SCRIPT_URL);
+        const data = await res.json();
 
-      const about = data.about;
-      document.getElementById("companyName").textContent = about.CompanyName;
-      document.getElementById("slogan").textContent = about.Slogan;
-      document.getElementById("aboutCompany").textContent = about.AboutCompany;
-      document.getElementById("email").textContent = about.EmailAddress;
-      document.getElementById("phone").textContent = about.ContactNuimber;
-      document.getElementById("whatsapp").textContent = about.Whatsapp;
-      document.getElementById("address").textContent = about.Address;
-      document.getElementById("footer").textContent = about.Footer;
+        // About
+        const about = data.About[0];
+        document.getElementById("heroTitle").textContent = about.CompanyName;
+        document.getElementById("heroTagline").textContent = about.Slogan;
+        document.getElementById("aboutText").textContent = about.AboutCompany;
+        document.getElementById("contactEmail").textContent = about.EmailAddress;
+        document.getElementById("phone").textContent = about.Whatsapp || about.ContactNuimber;
+        document.getElementById("address").textContent = about.Address;
+        document.getElementById("owner").textContent = about.Owner;
+        document.getElementById("role").textContent = about.Role;
+        document.getElementById("footerText").textContent = about.Footer;
+
+        // Jobs
+        const jobsDiv = document.getElementById("jobsList");
+        jobsDiv.innerHTML = "";
+        data.Jobs.forEach(job => {
+          const card = document.createElement("div");
+          card.className = "job-card";
+          card.innerHTML = `
+            <h3>${job.Position}</h3>
+            <p><strong>Country:</strong> ${job.Worker_Country}</p>
+            <p><strong>Gender:</strong> ${job.Gender}</p>
+            <p><strong>Age:</strong> ${job.Age_Range}</p>
+            <p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD}</p>
+            <p><strong>Rest Day:</strong> ${job.Rest_Day}</p>
+            <p>${job.Job_Description}</p>
+          `;
+          jobsDiv.appendChild(card);
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
 
-    loadAbout();
+    document.getElementById("enquiryForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const obj = {};
+      formData.forEach((v,k) => obj[k] = v);
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify({ type: "enquiry", data: obj }),
+        });
+        document.getElementById("enquiryStatus").textContent = "Enquiry sent successfully!";
+        e.target.reset();
+      } catch {
+        document.getElementById("enquiryStatus").textContent = "Error sending enquiry.";
+      }
+    });
+
+    loadData();
   </script>
 </body>
 </html>
