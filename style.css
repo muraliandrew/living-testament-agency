@@ -1,0 +1,91 @@
+/* --- BASE STYLES & MODERN REVAMP --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #005a8d;
+  --primary-hover: #004266;
+  --header-bg: #005a8d;
+  --text-color: #333333;
+  --text-light: #ffffff;
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+  --border-color: #dee2e6;
+  --shadow: 0 4px 6px rgba(0,0,0,0.07);
+  --hero-bg: #e7f3ff;
+  --hero-text: #004266;
+  --accent-color: #007bff;
+  --font-family: 'Poppins', sans-serif;
+  --festive-bg: transparent;
+}
+
+/* 
+  --- FESTIVAL THEMES ---
+  The class names here (e.g., "theme-deepavali") must match the "ThemeName" 
+  from your Google Sheet, converted to lowercase.
+*/
+.theme-cny {
+  --primary-color: #c0392b; --primary-hover: #a5281b; --header-bg: #c0392b;
+  --hero-bg: #fbeee6; --hero-text: #a5281b; --accent-color: #f1c40f;
+}
+.theme-thaipusam {
+  --primary-color: #f39c12; --primary-hover: #d68910; --header-bg: #f39c12;
+  --hero-bg: #fef5e7; --hero-text: #d68910; --accent-color: #27ae60;
+}
+.theme-hariraya {
+  --primary-color: #27ae60; --primary-hover: #1f8a4c; --header-bg: #27ae60;
+  --hero-bg: #e9f7ef; --hero-text: #1f8a4c; --accent-color: #f1c40f;
+}
+.theme-nationalday {
+  --primary-color: #d9252c; --primary-hover: #b01e23; --header-bg: #d9252c;
+  --hero-bg: #ffffff; --hero-text: #d9252c; --accent-color: #333;
+}
+.theme-malaysiaday {
+  --primary-color: #d9252c; --primary-hover: #b01e23; --header-bg: #d9252c;
+  --hero-bg: #ffffff; --hero-text: #d9252c; --accent-color: #f1c40f;
+}
+.theme-mooncakefestival {
+  --primary-color: #8e44ad; --primary-hover: #733290; --header-bg: #8e44ad;
+  --hero-bg: #f4eef7; --hero-text: #733290; --accent-color: #f1c40f;
+}
+.theme-deepavali {
+  --primary-color: #e67e22; --primary-hover: #c1681a; --header-bg: #e67e22;
+  --hero-bg: #fbeee6; --hero-text: #c1681a; --accent-color: #d35400;
+}
+.theme-christmas {
+  --primary-color: #27ae60; --primary-hover: #1f8a4c; --header-bg: #c0392b;
+  --hero-bg: #e9f7ef; --hero-text: #1f8a4c; --accent-color: #d9252c;
+}
+.theme-newyear {
+  --primary-color: #2c3e50; --primary-hover: #1a252f; --header-bg: #2c3e50;
+  --hero-bg: #e5e7e9; --hero-text: #1a252f; --accent-color: #f1c40f;
+}
+.theme-valentines {
+  --primary-color: #e91e63; --primary-hover: #c2185b; --header-bg: #e91e63;
+  --hero-bg: #fce4ec; --hero-text: #c2185b; --accent-color: #f48fb1;
+}
+
+/* --- ALL OTHER STYLES --- */
+/* (This part is identical to the previous version and is omitted here for brevity, but should be kept in your file) */
+body { font-family: var(--font-family); line-height: 1.6; margin: 0; color: var(--text-color); background-color: var(--bg-light); background-image: var(--festive-bg); }
+header, footer { background: var(--header-bg); color: var(--text-light); text-align: center; padding: 16px 0; transition: background 0.5s ease; }
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; }
+.logo { font-weight: 700; font-size: 1.5em; letter-spacing: 1px; }
+.nav-links { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; }
+.nav-links li a { color: var(--text-light); text-decoration: none; font-weight: 500; }
+section { padding: 48px 24px; max-width: 1000px; margin: 0 auto; }
+.hero { background: var(--hero-bg); color: var(--hero-text); padding: 60px 24px; text-align: center; border-bottom: 1px solid var(--border-color); transition: background 0.5s ease, color 0.5s ease; }
+.hero h1 { font-size: 2.5em; margin: 0 0 10px; }
+.hero p { font-size: 1.2em; margin: 0; }
+.job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 24px; }
+.job-card, .service-card, .testimonial-card, .modal-content { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; box-shadow: var(--shadow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.job-card:hover { transform: translateY(-5px); box-shadow: 0 8px 12px rgba(0,0,0,0.1); }
+.testimonial-card { border-left: 5px solid var(--primary-color); }
+.service-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.service-card { text-align: center; font-size: 1.1em; font-weight: 500; }
+input, textarea, select, button { width: 100%; margin-top: 12px; padding: 12px; box-sizing: border-box; border-radius: 6px; border: 1px solid var(--border-color); font-size: 16px; font-family: var(--font-family); }
+button { cursor: pointer; border: none; font-weight: 600; color: var(--text-light); }
+button[type="submit"] { background: var(--primary-color); transition: background 0.2s ease; }
+button[type="submit"]:hover { background: var(--primary-hover); }
+.job-card button { background: var(--accent-color); }
+.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+#closeModal { position: absolute; right: 16px; top: 10px; font-size: 28px; color: #888; cursor: pointer; font-weight: 300; }
