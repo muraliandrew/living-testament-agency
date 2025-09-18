@@ -5,7 +5,7 @@
   <title>Living Testament Agency</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <!-- NEW: Font Awesome for icons -->
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -128,18 +128,14 @@
   <script>
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyw_6VvW5ehMubzVRjobPla5Z-VuG6gB9iP0wh9HJNb1fGvZEmE1IZbcOlh1huqSb1q/exec"; // IMPORTANT: Use your latest deployment URL
 
-    // --- NEW: NAVIGATION LOGIC ---
+    // --- NAVIGATION LOGIC ---
     document.addEventListener('DOMContentLoaded', () => {
       const links = document.querySelectorAll('.sidebar-nav-link');
       const pages = document.querySelectorAll('.page');
       
       function navigate(pageId) {
-        // Hide all pages
         pages.forEach(page => page.classList.remove('active'));
-        // Show the target page
         document.getElementById(`page-${pageId}`).classList.add('active');
-        
-        // Update active link in sidebar
         links.forEach(link => {
           link.classList.remove('active');
           if (link.dataset.page === pageId) {
@@ -148,7 +144,6 @@
         });
       }
 
-      // Add click listeners to sidebar links
       links.forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
@@ -156,21 +151,18 @@
         });
       });
 
-      // Show the home page by default
       navigate('home');
-      
-      // Load all data from Google Sheet
       loadData();
     });
 
-    // --- ALL DATA FETCHING & PROCESSING LOGIC (Preserved and Updated) ---
-    function parseDMYDate(dateString) { /* ... same as before */
+    // --- HELPER & THEME FUNCTIONS ---
+    function parseDMYDate(dateString) {
       const parts = dateString.split('/');
       if (parts.length !== 3) return null;
       return new Date(parts[2], parts[1] - 1, parts[0]);
     }
     
-    function applyTheme(themes, aboutData) { /* ... same as before */
+    function applyTheme(themes, aboutData) {
       const today = new Date(); today.setHours(0, 0, 0, 0);
       let themeApplied = false;
       if (themes && themes.length > 0) {
@@ -192,6 +184,7 @@
       }
     }
 
+    // --- CORE DATA LOADING & POPULATION FUNCTION ---
     async function loadData() {
       try {
         const res = await fetch(APPS_SCRIPT_URL);
@@ -208,51 +201,57 @@
         document.getElementById("aboutMission").textContent = about.OurMission;
         document.getElementById("aboutVision").textContent = about.OurVision;
         document.getElementById("whyChooseUsTitle").textContent = about.WhyChooseUs_Title;
-        // Clickable/Icon contacts
         document.getElementById("contactEmail").innerHTML = `<i class="fa-solid fa-envelope"></i> <a href="mailto:${about.EmailAddress}">${about.EmailAddress}</a>`;
         document.getElementById("phone").innerHTML = `<i class="fa-solid fa-phone"></i> <a href="tel:${about.Whatsapp}">${about.Whatsapp}</a>`;
         document.getElementById("address").textContent = about.Address;
         document.getElementById("owner").textContent = about.Owner;
         document.getElementById("role").textContent = about.Role;
-        // Dynamically create "Why Choose Us" points
         const pointsContainer = document.getElementById("aboutPoints");
         pointsContainer.innerHTML = '';
         for (let i = 1; i <= 3; i++) {
           if (about[`Point${i}_Text`]) {
             const pointCard = document.createElement('div');
             pointCard.className = 'about-point-card';
-            pointCard.innerHTML = `
-              <div class="icon">${about[`Point${i}_Icon`]}</div>
-              <p>${about[`Point${i}_Text`]}</p>
-            `;
+            pointCard.innerHTML = `<div class="icon">${about[`Point${i}_Icon`]}</div><p>${about[`Point${i}_Text`]}</p>`;
             pointsContainer.appendChild(pointCard);
           }
         }
         
-        // Populate JOBS page
+        // Populate JOBS page (This is the SAFE and UPDATED version)
         const jobsDiv = document.getElementById("jobsList");
         jobsDiv.innerHTML = "";
         data.Jobs.forEach((job, idx) => {
           const card = document.createElement("div");
           card.className = "job-card";
           
-          // This is the updated HTML structure for each job card
           card.innerHTML = `
-            <h3>${job.Position}</h3>
-            <p><strong>Country:</strong> ${job.Worker_Country}</p>
-            <p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD}</p>
-            <p><strong>Accommodation:</strong> ${job.Accommodation}</p>
-            <p><strong>Work Pattern:</strong> ${job.WorkDayPattern}</p>
-            <p><strong>Details:</strong> ${job.Gender}, Age ${job.Age_Range}</p>
-            <p>${job.Job_Description}</p>
+            <h3>${job.Position || 'Position Not Available'}</h3>
+            <p><strong>Country:</strong> ${job.Worker_Country || 'N/A'}</p>
+            <p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD || 'N/A'}</p>
+            <p><strong>Accommodation:</strong> ${job.Accommodation || 'N/A'}</p>
+            <p><strong>Work Pattern:</strong> ${job.WorkDayPattern || 'N/A'}</p>
+            <p><strong>Details:</strong> ${job.Gender || 'N/A'}, Age ${job.Age_Range || 'N/A'}</p>
+            <p>${job.Job_Description || 'No description provided.'}</p>
             <button class="applyBtn" data-idx="${idx}">Apply</button>
           `;
           
           jobsDiv.appendChild(card);
         });
+
+        // Add event listeners
+        document.querySelectorAll('.applyBtn').forEach(btn => {
+          btn.addEventListener('click', function() { openJobAppModal(data.Jobs[this.dataset.idx], this.dataset.idx); });
+        });
+        window.jobsData = data.Jobs;
+
+      } catch (err) {
+        console.error("Failed to load data:", err);
+        document.getElementById("jobsList").innerHTML = `<p style="color: red;">Error: Could not load job data. Please check the console for more details.</p>`;
+      }
+    }
     
-    // --- ALL MODAL & FORM SUBMISSION LOGIC (Unchanged) ---
-    function openJobAppModal(job, idx) { /* ... same as before */ 
+    // --- MODAL & FORM SUBMISSION LOGIC (Unchanged) ---
+    function openJobAppModal(job, idx) {
         document.getElementById('jobPosition').value = job.Position;
         document.getElementById('jobCountry').value = job.Worker_Country;
         document.getElementById('jobId').value = idx;
@@ -262,20 +261,20 @@
         document.getElementById('jobAppStatus').textContent = "";
         document.getElementById('jobAppModal').style.display = "block";
     }
-    document.getElementById('closeModal').onclick = function() { /* ... same as before */ 
+    document.getElementById('closeModal').onclick = function() {
         document.getElementById('jobAppModal').style.display = "none"; 
     };
-    window.onclick = function(event) { /* ... same as before */
+    window.onclick = function(event) {
         const modal = document.getElementById('jobAppModal');
         if (event.target == modal) { modal.style.display = "none"; }
     };
-    document.getElementById("jobAppForm").addEventListener("submit", async e => { /* ... same as before */
+    document.getElementById("jobAppForm").addEventListener("submit", async e => {
         e.preventDefault(); const formData = new FormData(e.target); const obj = {}; formData.forEach((v,k) => obj[k] = v);
         try { await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "job_application", data: obj }) });
         document.getElementById("jobAppStatus").textContent = "Application submitted successfully!"; e.target.reset();
         } catch { document.getElementById("jobAppStatus").textContent = "Error submitting application."; }
     });
-    document.getElementById("enquiryForm").addEventListener("submit", async e => { /* ... same as before */
+    document.getElementById("enquiryForm").addEventListener("submit", async e => {
         e.preventDefault(); const formData = new FormData(e.target); const obj = {}; formData.forEach((v,k) => obj[k] = v);
         try { await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "enquiry", data: obj }) });
         document.getElementById("enquiryStatus").textContent = "Enquiry sent successfully!"; e.target.reset();
