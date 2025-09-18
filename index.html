@@ -235,18 +235,21 @@
         data.Jobs.forEach((job, idx) => {
           const card = document.createElement("div");
           card.className = "job-card";
-          card.innerHTML = `<h3>${job.Position}</h3><p><strong>Country:</strong> ${job.Worker_Country}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD}</p><p>${job.Job_Description}</p><button class="applyBtn" data-idx="${idx}">Apply</button>`;
+          
+          // This is the updated HTML structure for each job card
+          card.innerHTML = `
+            <h3>${job.Position}</h3>
+            <p><strong>Country:</strong> ${job.Worker_Country}</p>
+            <p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD}</p>
+            <p><strong>Accommodation:</strong> ${job.Accommodation}</p>
+            <p><strong>Work Pattern:</strong> ${job.WorkDayPattern}</p>
+            <p><strong>Details:</strong> ${job.Gender}, Age ${job.Age_Range}</p>
+            <p>${job.Job_Description}</p>
+            <button class="applyBtn" data-idx="${idx}">Apply</button>
+          `;
+          
           jobsDiv.appendChild(card);
         });
-        document.querySelectorAll('.applyBtn').forEach(btn => {
-          btn.addEventListener('click', function() { openJobAppModal(data.Jobs[this.dataset.idx], this.dataset.idx); });
-        });
-        window.jobsData = data.Jobs;
-
-      } catch (err) {
-        console.error("Failed to load data:", err);
-      }
-    }
     
     // --- ALL MODAL & FORM SUBMISSION LOGIC (Unchanged) ---
     function openJobAppModal(job, idx) { /* ... same as before */ 
