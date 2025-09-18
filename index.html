@@ -5,56 +5,188 @@
   <title>Living Testament Agency</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <!-- NEW: Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <!-- All your HTML structure (header, sections, footer) remains exactly the same -->
-  <header> <nav class="navbar"> <div class="logo">Living Testament Agency</div> <ul class="nav-links"> <li><a href="#about">About</a></li> <li><a href="#jobs">Jobs</a></li> <li><a href="#enquiry">Enquiry</a></li> </ul> </nav> </header>
-  <section class="hero"> <h1 id="heroTitle">Welcome to Living Testament Agency</h1> <p id="heroTagline">Sourcing trusted workers for Singapore</p> </section>
-  <section class="services"> <h2>Our Services</h2> <div class="service-grid"> <div class="service-card">✔️ Domestic Helpers</div> <div class="service-card">✔️ Office Cleaners</div> <div class="service-card">✔️ Hospitality Staff</div> </div> </section>
-  <section id="about"> <h2>About Us</h2> <p id="aboutText"></p> <p><strong>Email:</strong> <span id="contactEmail"></span></p> <p><strong>Phone/WhatsApp:</strong> <span id="phone"></span></p> <p><strong>Address:</strong> <span id="address"></span></p> <p><strong>Owner:</strong> <span id="owner"></span> (<span id="role"></span>)</p> </section>
-  <section id="jobs"> <h2>Available Jobs</h2> <div id="jobsList" class="job-grid">Loading jobs...</div> </section>
-  <div id="jobAppModal" class="modal"> <div class="modal-content"> <span id="closeModal">&times;</span> <h2>Job Application</h2> <form id="jobAppForm"> <input type="hidden" name="Position" id="jobPosition"> <input type="hidden" name="Country" id="jobCountry"> <input type="hidden" name="JobID" id="jobId"> <div><strong>Position: </strong><span id="modalPosition"></span></div> <div><strong>Country: </strong><span id="modalCountry"></span></div> <div><strong>Salary: </strong><span id="modalSalary"></span></div> <hr> <input type="text" name="Applicant_Name" placeholder="Your Name" required> <input type="tel" name="Applicant_Phone" placeholder="Phone Number" required> <input type="email" name="Applicant_Email" placeholder="Email" required> <textarea name="Applicant_Message" placeholder="Why are you suitable for this job?" required></textarea> <button type="submit">Apply Now</button> </form> <p id="jobAppStatus"></p> </div> </div>
-  <section id="enquiry"> <h2>Send an Enquiry</h2> <form id="enquiryForm"> <input type="text" name="Full_Name" placeholder="Full Name" required> <input type="email" name="Email" placeholder="Email Address" required> <input type="tel" name="Phone" placeholder="Phone Number" required> <select name="Enquiry_Type" required> <option value="" disabled selected>-- Select Enquiry Type --</option> <option value="Domestic Helper">Domestic Helper Enquiry</option> <option value="Office Cleaning">Office Cleaning Enquiry</option> <option value="Hospitality Staff">Hospitality Staff Enquiry</option> <option value="General Question">General Question</option> </select> <textarea name="Message" placeholder="Your message..." required></textarea> <button type="submit">Submit</button> </form> <p id="enquiryStatus"></p> </section>
-  <footer> <p id="footerText"></p> </footer>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">Living Testament Agency</div>
+    <ul class="sidebar-nav">
+      <li><a href="#" class="sidebar-nav-link" data-page="home">Home</a></li>
+      <li><a href="#" class="sidebar-nav-link" data-page="about">About Us</a></li>
+      <li><a href="#" class="sidebar-nav-link" data-page="jobs">Available Jobs</a></li>
+      <li><a href="#" class="sidebar-nav-link" data-page="enquiry">Enquiry</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    
+    <!-- PAGE 1: HOME -->
+    <div id="page-home" class="page">
+      <section class="hero">
+        <h1 id="heroTitle">Welcome to the Agency</h1>
+        <p id="heroTagline">Slogan will be loaded here...</p>
+      </section>
+      
+      <section id="services">
+        <h2>Our Services</h2>
+        <div class="service-grid">
+          <div class="service-card">✔️ Domestic Helpers</div>
+          <div class="service-card">✔️ Office Cleaners</div>
+          <div class="service-card">✔️ Hospitality Staff</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE 2: ABOUT US -->
+    <div id="page-about" class="page">
+      <section id="about">
+        <h2>About Our Agency</h2>
+        <div class="about-grid">
+          <div class="about-mission">
+            <h3>Our Mission</h3>
+            <p id="aboutMission"></p>
+          </div>
+          <div class="about-vision">
+            <h3>Our Vision</h3>
+            <p id="aboutVision"></p>
+          </div>
+        </div>
+
+        <h3 id="whyChooseUsTitle">Why Choose Us?</h3>
+        <div id="aboutPoints" class="about-points-grid">
+          <!-- "Why Choose Us" points will be dynamically inserted here -->
+        </div>
+        
+        <hr style="margin: 32px 0;">
+
+        <h3>Contact Information</h3>
+        <p class="contact-info" id="contactEmail"></p>
+        <p class="contact-info" id="phone"></p>
+        <p><strong>Address:</strong> <span id="address"></span></p>
+        <p><strong>Owner:</strong> <span id="owner"></span> (<span id="role"></span>)</p>
+      </section>
+    </div>
+
+    <!-- PAGE 3: JOBS -->
+    <div id="page-jobs" class="page">
+      <section id="jobs">
+        <h2>Available Jobs</h2>
+        <div id="jobsList" class="job-grid">Loading jobs...</div>
+      </section>
+    </div>
+
+    <!-- PAGE 4: ENQUIRY -->
+    <div id="page-enquiry" class="page">
+      <section id="enquiry">
+        <h2>Send an Enquiry</h2>
+        <form id="enquiryForm">
+          <input type="text" name="Full_Name" placeholder="Full Name" required>
+          <input type="email" name="Email" placeholder="Email Address" required>
+          <input type="tel" name="Phone" placeholder="Phone Number" required>
+          <select name="Enquiry_Type" required>
+            <option value="" disabled selected>-- Select Enquiry Type --</option>
+            <option value="Domestic Helper">Domestic Helper</option>
+            <option value="Office Cleaning">Office Cleaning</option>
+            <option value="Hospitality Staff">Hospitality Staff</option>
+            <option value="General Question">General Question</option>
+          </select>
+          <textarea name="Message" placeholder="Your message..." required></textarea>
+          <button type="submit">Submit</button>
+        </form>
+        <p id="enquiryStatus"></p>
+      </section>
+    </div>
+  </main>
+  
+  <!-- MODAL (remains outside the main content for proper display) -->
+  <div id="jobAppModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2>Job Application</h2>
+      <form id="jobAppForm">
+        <input type="hidden" name="Position" id="jobPosition">
+        <input type="hidden" name="Country" id="jobCountry">
+        <input type="hidden" name="JobID" id="jobId">
+        <div><strong>Position: </strong><span id="modalPosition"></span></div>
+        <div><strong>Country: </strong><span id="modalCountry"></span></div>
+        <div><strong>Salary: </strong><span id="modalSalary"></span></div>
+        <hr>
+        <input type="text" name="Applicant_Name" placeholder="Your Name" required>
+        <input type="tel" name="Applicant_Phone" placeholder="Phone Number" required>
+        <input type="email" name="Applicant_Email" placeholder="Email" required>
+        <textarea name="Applicant_Message" placeholder="Why are you suitable for this job?" required></textarea>
+        <button type="submit">Apply Now</button>
+      </form>
+      <p id="jobAppStatus"></p>
+    </div>
+  </div>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyw_6VvW5ehMubzVRjobPla5Z-VuG6gB9iP0wh9HJNb1fGvZEmE1IZbcOlh1huqSb1q/exec"; // Make sure this is your latest deployment URL
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyw_6VvW5ehMubzVRjobPla5Z-VuG6gB9iP0wh9HJNb1fGvZEmE1IZbcOlh1huqSb1q/exec"; // IMPORTANT: Use your latest deployment URL
 
-    //-- NEW HELPER FUNCTION to reliably parse DD/MM/YYYY dates from the sheet
-    function parseDMYDate(dateString) {
+    // --- NEW: NAVIGATION LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.sidebar-nav-link');
+      const pages = document.querySelectorAll('.page');
+      
+      function navigate(pageId) {
+        // Hide all pages
+        pages.forEach(page => page.classList.remove('active'));
+        // Show the target page
+        document.getElementById(`page-${pageId}`).classList.add('active');
+        
+        // Update active link in sidebar
+        links.forEach(link => {
+          link.classList.remove('active');
+          if (link.dataset.page === pageId) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Add click listeners to sidebar links
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          navigate(link.dataset.page);
+        });
+      });
+
+      // Show the home page by default
+      navigate('home');
+      
+      // Load all data from Google Sheet
+      loadData();
+    });
+
+    // --- ALL DATA FETCHING & PROCESSING LOGIC (Preserved and Updated) ---
+    function parseDMYDate(dateString) { /* ... same as before */
       const parts = dateString.split('/');
       if (parts.length !== 3) return null;
-      // Note: month is 0-indexed in JavaScript (0=Jan, 11=Dec)
       return new Date(parts[2], parts[1] - 1, parts[0]);
     }
-
-    //-- NEW FUNCTION to apply theme and set the welcome message
-    function applyTheme(themes, aboutData) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0); // Normalize for accurate date comparison
+    
+    function applyTheme(themes, aboutData) { /* ... same as before */
+      const today = new Date(); today.setHours(0, 0, 0, 0);
       let themeApplied = false;
-
       if (themes && themes.length > 0) {
         for (const theme of themes) {
           const startDate = parseDMYDate(theme.StartDate);
           const endDate = parseDMYDate(theme.EndDate);
-
           if (startDate && endDate && today >= startDate && today <= endDate) {
-            // Convert "ThemeName" to a CSS class, e.g., "MooncakeFestival" -> "theme-mooncakefestival"
             const cssClass = `theme-${theme.ThemeName.replace(/\s+/g, '').toLowerCase()}`;
             document.body.classList.add(cssClass);
-            
-            // Update the hero title with the WelcomeMessage
+            document.querySelector('.sidebar').classList.add(cssClass);
             document.getElementById("heroTitle").textContent = theme.WelcomeMessage;
-            
             themeApplied = true;
-            console.log(`Theme applied: ${theme.ThemeName}`);
-            break; // Apply only the first matching theme
+            break;
           }
         }
       }
-
-      //-- If no theme was applied, use the default company name from the "About" sheet
       if (!themeApplied) {
         document.getElementById("heroTitle").textContent = aboutData.CompanyName;
       }
@@ -66,90 +198,86 @@
         const data = await res.json();
         const about = data.About[0];
 
-        //-- MODIFIED: Call the new theme function FIRST
+        // Apply theme
         applyTheme(data.Themes, about);
         
-        //-- Set the tagline (the main hero title is now handled by the theme function)
+        // Populate HOME page
         document.getElementById("heroTagline").textContent = about.Slogan;
-        
-        //-- The rest of your working code is UNCHANGED
-        document.getElementById("aboutText").textContent = about.AboutCompany;
-        document.getElementById("contactEmail").textContent = about.EmailAddress;
-        document.getElementById("phone").textContent = about.Whatsapp || about.ContactNuimber;
+
+        // Populate ABOUT US page
+        document.getElementById("aboutMission").textContent = about.OurMission;
+        document.getElementById("aboutVision").textContent = about.OurVision;
+        document.getElementById("whyChooseUsTitle").textContent = about.WhyChooseUs_Title;
+        // Clickable/Icon contacts
+        document.getElementById("contactEmail").innerHTML = `<i class="fa-solid fa-envelope"></i> <a href="mailto:${about.EmailAddress}">${about.EmailAddress}</a>`;
+        document.getElementById("phone").innerHTML = `<i class="fa-solid fa-phone"></i> <a href="tel:${about.Whatsapp}">${about.Whatsapp}</a>`;
         document.getElementById("address").textContent = about.Address;
         document.getElementById("owner").textContent = about.Owner;
         document.getElementById("role").textContent = about.Role;
-        document.getElementById("footerText").textContent = about.Footer;
-
+        // Dynamically create "Why Choose Us" points
+        const pointsContainer = document.getElementById("aboutPoints");
+        pointsContainer.innerHTML = '';
+        for (let i = 1; i <= 3; i++) {
+          if (about[`Point${i}_Text`]) {
+            const pointCard = document.createElement('div');
+            pointCard.className = 'about-point-card';
+            pointCard.innerHTML = `
+              <div class="icon">${about[`Point${i}_Icon`]}</div>
+              <p>${about[`Point${i}_Text`]}</p>
+            `;
+            pointsContainer.appendChild(pointCard);
+          }
+        }
+        
+        // Populate JOBS page
         const jobsDiv = document.getElementById("jobsList");
         jobsDiv.innerHTML = "";
         data.Jobs.forEach((job, idx) => {
           const card = document.createElement("div");
           card.className = "job-card";
-          card.innerHTML = `<h3>${job.Position}</h3><p><strong>Country:</strong> ${job.Worker_Country}</p><p><strong>Gender:</strong> ${job.Gender}</p><p><strong>Age:</strong> ${job.Age_Range}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD}</p><p><strong>Rest Day:</strong> ${job.Rest_Day}</p><p>${job.Job_Description}</p><button class="applyBtn" data-idx="${idx}">Apply</button>`;
+          card.innerHTML = `<h3>${job.Position}</h3><p><strong>Country:</strong> ${job.Worker_Country}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD}</p><p>${job.Job_Description}</p><button class="applyBtn" data-idx="${idx}">Apply</button>`;
           jobsDiv.appendChild(card);
         });
-
         document.querySelectorAll('.applyBtn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const job = data.Jobs[this.dataset.idx];
-            openJobAppModal(job, this.dataset.idx);
-          });
+          btn.addEventListener('click', function() { openJobAppModal(data.Jobs[this.dataset.idx], this.dataset.idx); });
         });
         window.jobsData = data.Jobs;
+
       } catch (err) {
         console.error("Failed to load data:", err);
       }
     }
     
-    //-- All the other functions (modal, form submissions, etc.) are UNCHANGED
-    function openJobAppModal(job, idx) {
-      document.getElementById('jobPosition').value = job.Position;
-      document.getElementById('jobCountry').value = job.Worker_Country;
-      document.getElementById('jobId').value = idx;
-      document.getElementById('modalPosition').textContent = job.Position;
-      document.getElementById('modalCountry').textContent = job.Worker_Country;
-      document.getElementById('modalSalary').textContent = "SGD " + job.Monthly_Salary_SGD;
-      document.getElementById('jobAppStatus').textContent = "";
-      document.getElementById('jobAppModal').style.display = "block";
+    // --- ALL MODAL & FORM SUBMISSION LOGIC (Unchanged) ---
+    function openJobAppModal(job, idx) { /* ... same as before */ 
+        document.getElementById('jobPosition').value = job.Position;
+        document.getElementById('jobCountry').value = job.Worker_Country;
+        document.getElementById('jobId').value = idx;
+        document.getElementById('modalPosition').textContent = job.Position;
+        document.getElementById('modalCountry').textContent = job.Worker_Country;
+        document.getElementById('modalSalary').textContent = "SGD " + job.Monthly_Salary_SGD;
+        document.getElementById('jobAppStatus').textContent = "";
+        document.getElementById('jobAppModal').style.display = "block";
     }
-    document.getElementById('closeModal').onclick = function() {
-      document.getElementById('jobAppModal').style.display = "none";
+    document.getElementById('closeModal').onclick = function() { /* ... same as before */ 
+        document.getElementById('jobAppModal').style.display = "none"; 
     };
-    window.onclick = function(event) {
-      const modal = document.getElementById('jobAppModal');
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+    window.onclick = function(event) { /* ... same as before */
+        const modal = document.getElementById('jobAppModal');
+        if (event.target == modal) { modal.style.display = "none"; }
     };
-    document.getElementById("jobAppForm").addEventListener("submit", async e => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const obj = {};
-      formData.forEach((v,k) => obj[k] = v);
-      try {
-        await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "job_application", data: obj }) });
-        document.getElementById("jobAppStatus").textContent = "Application submitted successfully!";
-        e.target.reset();
-      } catch {
-        document.getElementById("jobAppStatus").textContent = "Error submitting application.";
-      }
+    document.getElementById("jobAppForm").addEventListener("submit", async e => { /* ... same as before */
+        e.preventDefault(); const formData = new FormData(e.target); const obj = {}; formData.forEach((v,k) => obj[k] = v);
+        try { await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "job_application", data: obj }) });
+        document.getElementById("jobAppStatus").textContent = "Application submitted successfully!"; e.target.reset();
+        } catch { document.getElementById("jobAppStatus").textContent = "Error submitting application."; }
     });
-    document.getElementById("enquiryForm").addEventListener("submit", async e => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const obj = {};
-      formData.forEach((v,k) => obj[k] = v);
-      try {
-        await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "enquiry", data: obj }) });
-        document.getElementById("enquiryStatus").textContent = "Enquiry sent successfully!";
-        e.target.reset();
-      } catch {
-        document.getElementById("enquiryStatus").textContent = "Error sending enquiry.";
-      }
+    document.getElementById("enquiryForm").addEventListener("submit", async e => { /* ... same as before */
+        e.preventDefault(); const formData = new FormData(e.target); const obj = {}; formData.forEach((v,k) => obj[k] = v);
+        try { await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "enquiry", data: obj }) });
+        document.getElementById("enquiryStatus").textContent = "Enquiry sent successfully!"; e.target.reset();
+        } catch { document.getElementById("enquiryStatus").textContent = "Error sending enquiry."; }
     });
-    
-    loadData();
   </script>
 </body>
 </html>
