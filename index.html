@@ -9,11 +9,8 @@
 </head>
 <body>
 
-  <!-- Sidebar Navigation -->
   <nav class="sidebar">
-    <div class="sidebar-logo">
-      <img src="LTA.jpeg" alt="Living Testament Agency Logo">
-    </div>
+    <div class="sidebar-logo"><img src="LTA.jpeg" alt="Agency Logo"></div>
     <ul class="sidebar-nav">
       <li><a href="#" class="sidebar-nav-link" data-page="home">Home</a></li>
       <li><a href="#" class="sidebar-nav-link" data-page="about">About Us</a></li>
@@ -22,16 +19,11 @@
     </ul>
   </nav>
 
-  <!-- Main Content Area -->
   <main class="main-content">
-    
-    <!-- PAGE 1: HOME -->
     <div id="page-home" class="page">
       <section class="hero"><h1 id="heroTitle">Welcome</h1><p id="heroTagline">Loading...</p></section>
       <section id="services"><h2>Our Services</h2><div class="service-grid"><div class="service-card">✔️ Domestic Helpers</div><div class="service-card">✔️ Office Cleaners</div><div class="service-card">✔️ Hospitality Staff</div></div></section>
     </div>
-
-    <!-- PAGE 2: ABOUT US -->
     <div id="page-about" class="page">
       <section id="about">
         <h2>About Our Agency</h2>
@@ -54,57 +46,36 @@
         </div>
       </section>
     </div>
-
-    <!-- PAGE 3: JOBS -->
     <div id="page-jobs" class="page">
       <section id="jobs"><h2>Available Jobs</h2><div id="jobsList" class="job-grid">Loading jobs...</div></section>
     </div>
-
-    <!-- PAGE 4: ENQUIRY -->
     <div id="page-enquiry" class="page">
       <section id="enquiry">
         <h2>Send an Enquiry</h2>
         <form id="enquiryForm">
-          <input type="text" name="Full_Name" placeholder="Full Name" required>
-          <input type="email" name="Email" placeholder="Email Address" required>
-          <input type="tel" name="Phone" placeholder="Phone Number" required>
+          <input type="text" name="Full_Name" placeholder="Full Name" required><input type="email" name="Email" placeholder="Email Address" required><input type="tel" name="Phone" placeholder="Phone Number" required>
           <select name="Enquiry_Type" required><option value="" disabled selected>-- Select Enquiry Type --</option><option value="Domestic Helper">Domestic Helper</option><option value="Office Cleaning">Office Cleaning</option><option value="Hospitality Staff">Hospitality Staff</option><option value="General Question">General Question</option></select>
-          <textarea name="Message" placeholder="Your message..." required></textarea>
-          <button type="submit">Submit</button>
-        </form>
-        <p id="enquiryStatus"></p>
+          <textarea name="Message" placeholder="Your message..." required></textarea><button type="submit">Submit</button>
+        </form><p id="enquiryStatus"></p>
       </section>
     </div>
   </main>
   
-  <!-- MODAL -->
   <div id="jobAppModal" class="modal">
     <div class="modal-content">
-      <span id="closeModal">&times;</span>
-      <h2>Job Application</h2>
+      <span id="closeModal">&times;</span><h2>Job Application</h2>
       <form id="jobAppForm">
-        <input type="hidden" name="Position" id="jobPosition">
-        <input type="hidden" name="Country" id="jobCountry">
-        <input type="hidden" name="Job_ID" id="jobIdField">
-        <div><strong>Job ID: </strong><span id="modalJobId"></span></div>
-        <div><strong>Position: </strong><span id="modalPosition"></span></div>
-        <div><strong>Country: </strong><span id="modalCountry"></span></div>
-        <div><strong>Salary: </strong><span id="modalSalary"></span></div>
-        <hr>
-        <input type="text" name="Applicant_Name" placeholder="Your Name" required>
-        <input type="tel" name="Applicant_Phone" placeholder="Phone Number" required>
-        <input type="email" name="Applicant_Email" placeholder="Email" required>
-        <textarea name="Applicant_Message" placeholder="Why are you suitable for this job?" required></textarea>
-        <button type="submit">Apply Now</button>
-      </form>
-      <p id="jobAppStatus"></p>
+        <input type="hidden" name="Position" id="jobPosition"><input type="hidden" name="Country" id="jobCountry"><input type="hidden" name="Job_ID" id="jobIdField">
+        <div><strong>Job ID: </strong><span id="modalJobId"></span></div><div><strong>Position: </strong><span id="modalPosition"></span></div><div><strong>Country: </strong><span id="modalCountry"></span></div><div><strong>Salary: </strong><span id="modalSalary"></span></div><hr>
+        <input type="text" name="Applicant_Name" placeholder="Your Name" required><input type="tel" name="Applicant_Phone" placeholder="Phone Number" required><input type="email" name="Applicant_Email" placeholder="Email" required>
+        <textarea name="Applicant_Message" placeholder="Why are you suitable for this job?" required></textarea><button type="submit">Apply Now</button>
+      </form><p id="jobAppStatus"></p>
     </div>
   </div>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmjtCboCm4_4fK8drSC5D3Y0erAMsyvm1HnKZxqZ9xQ-Y5DLly6NfUOQHpG-QmgEnN/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRb-_r_EE7qkQQtWBjtLxP3PWECSsagYQCDWnCf5Rn6WKfG2r-NKeJL2a2AUcuv968/exec";
 
-    // --- NAVIGATION LOGIC ---
     document.addEventListener('DOMContentLoaded', () => {
       const links = document.querySelectorAll('.sidebar-nav-link'); const pages = document.querySelectorAll('.page');
       function navigate(pageId) { pages.forEach(p => p.classList.remove('active')); document.getElementById(`page-${pageId}`).classList.add('active'); links.forEach(l => { l.classList.remove('active'); if (l.dataset.page === pageId) l.classList.add('active'); }); }
@@ -113,7 +84,6 @@
       loadData();
     });
 
-    // --- HELPER & THEME FUNCTIONS ---
     function parseDMYDate(dateString) { const p = (dateString || '').split('/'); return p.length === 3 ? new Date(p[2], p[1] - 1, p[0]) : null; }
     function applyTheme(themes, aboutData) {
       const today = new Date(); today.setHours(0, 0, 0, 0); let themeApplied = false;
@@ -131,15 +101,14 @@
       if (!themeApplied) document.getElementById("heroTitle").textContent = aboutData.CompanyName || "Welcome";
     }
 
-    // --- SAFER CORE DATA LOADING & POPULATION ---
     async function loadData() {
       try {
         const uniqueUrl = APPS_SCRIPT_URL + "?t=" + new Date().getTime();
         const res = await fetch(uniqueUrl);
-        if (!res.ok) { throw new Error(`Failed to fetch from Apps Script. Server responded with status ${res.status}.`); }
+        if (!res.ok) { throw new Error(`Server responded with status ${res.status}. Check Apps Script deployment.`); }
         const data = await res.json();
-
-        if (!data.About || data.About.length === 0) { throw new Error("The 'About' sheet is empty or not found. Please ensure it has headers and at least one row of data."); }
+        if (data.error) { throw new Error(`Apps Script Error: ${data.error}`); }
+        if (!data.About || data.About.length === 0) { throw new Error("The 'About' sheet has no data rows. Please fill in at least one row."); }
         const about = data.About[0];
         
         applyTheme(data.Themes, about);
@@ -179,28 +148,16 @@
 
       } catch (err) {
         console.error("Critical Error in loadData:", err);
-        document.querySelector('.main-content').innerHTML = `<div class="page active" style="padding: 40px; text-align: center;"><h2>An Error Occurred</h2><p style="color: red; font-weight: bold;">Could not load website data.</p><p><strong>Please check the following:</strong></p><ol style="text-align: left; display: inline-block;"><li>The Apps Script URL is correct.</li><li>The Google Sheet has the correct headers.</li><li>The 'About' sheet has at least one row of data.</li></ol><p><em>Error message: ${err.message}</em></p></div>`;
+        document.querySelector('.main-content').innerHTML = `<div class="page active" style="padding: 40px; text-align: center;"><h2>An Error Occurred</h2><p style="color: red; font-weight: bold;">Could not load website data.</p><p><strong>Please check the following:</strong></p><ol style="text-align: left; display: inline-block;"><li>The Apps Script URL is correct & recently deployed.</li><li>The Google Sheet has the correct headers.</li><li>The 'About' sheet has at least one row of data.</li></ol><p><em>Error message: ${err.message}</em></p></div>`;
       }
     }
     
-    // --- MODAL & FORM SUBMISSION LOGIC ---
-    function openJobAppModal(job) { /* ... (This section is unchanged and safe) ... */ }
-    document.getElementById('closeModal').onclick = () => { /* ... (Unchanged) ... */ };
-    window.onclick = (e) => { /* ... (Unchanged) ... */ };
-    document.getElementById("jobAppForm").addEventListener("submit", async e => { /* ... (Unchanged) ... */ });
-    document.getElementById("enquiryForm").addEventListener("submit", async e => { /* ... (Unchanged) ... */ });
-
-    // --- Condensed versions of unchanged functions ---
     function openJobAppModal(job) {
-      document.getElementById('jobIdField').value = job.Job_ID || 'N/A';
-      document.getElementById('modalJobId').textContent = job.Job_ID || 'N/A';
-      document.getElementById('jobPosition').value = job.Position || '';
-      document.getElementById('modalPosition').textContent = job.Position || '';
-      document.getElementById('jobCountry').value = job.Worker_Country || '';
-      document.getElementById('modalCountry').textContent = job.Worker_Country || '';
+      document.getElementById('jobIdField').value = job.Job_ID || 'N/A'; document.getElementById('modalJobId').textContent = job.Job_ID || 'N/A';
+      document.getElementById('jobPosition').value = job.Position || ''; document.getElementById('modalPosition').textContent = job.Position || '';
+      document.getElementById('jobCountry').value = job.Worker_Country || ''; document.getElementById('modalCountry').textContent = job.Worker_Country || '';
       document.getElementById('modalSalary').textContent = "SGD " + (job.Monthly_Salary_SGD || 'N/A');
-      document.getElementById('jobAppStatus').textContent = "";
-      document.getElementById('jobAppModal').style.display = "block";
+      document.getElementById('jobAppStatus').textContent = ""; document.getElementById('jobAppModal').style.display = "block";
     }
     document.getElementById('closeModal').onclick = () => { document.getElementById('jobAppModal').style.display = "none"; };
     window.onclick = (e) => { if (e.target == document.getElementById('jobAppModal')) { e.target.style.display = "none"; }};
