@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Living Testament Agency</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8"><title>Living Testament Agency</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
   <nav class="sidebar">
     <div class="sidebar-logo"><img src="LTA.jpeg" alt="Agency Logo"></div>
     <ul class="sidebar-nav">
@@ -18,151 +14,124 @@
       <li><a href="#" class="sidebar-nav-link" data-page="enquiry">Enquiry</a></li>
     </ul>
   </nav>
-
   <main class="main-content">
-    <div id="page-home" class="page">
-      <section class="hero"><h1 id="heroTitle">Welcome</h1><p id="heroTagline">Loading...</p></section>
-      <section id="services"><h2>Our Services</h2><div class="service-grid"><div class="service-card">✔️ Domestic Helpers</div><div class="service-card">✔️ Office Cleaners</div><div class="service-card">✔️ Hospitality Staff</div></div></section>
-    </div>
-    <div id="page-about" class="page">
-      <section id="about">
-        <h2>About Our Agency</h2>
-        <div class="about-grid">
-          <div class="about-mission"><h3>Our Mission</h3><p id="aboutMission"></p></div>
-          <div class="about-vision"><h3>Our Vision</h3><p id="aboutVision"></p></div>
-        </div>
-        <h3 id="whyChooseUsTitle">Why Choose Us?</h3>
-        <div id="aboutPoints" class="about-points-grid"></div>
-        <hr style="margin: 32px 0;">
-        <h3>Contact & Company Information</h3>
-        <div class="owner-profile">
-          <img src="murali.jpeg" alt="Owner Photo">
-          <div class="owner-details">
-            <p><strong>Owner:</strong> <span id="owner"></span> (<span id="role"></span>)</p>
-            <p class="contact-info" id="contactEmail"></p>
-            <p class="contact-info" id="phone"></p>
-            <p><strong>Address:</strong> <span id="address"></span></p>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div id="page-jobs" class="page">
-      <section id="jobs"><h2>Available Jobs</h2><div id="jobsList" class="job-grid">Loading jobs...</div></section>
-    </div>
-    <div id="page-enquiry" class="page">
-      <section id="enquiry">
-        <h2>Send an Enquiry</h2>
-        <form id="enquiryForm">
-          <input type="text" name="Full_Name" placeholder="Full Name" required><input type="email" name="Email" placeholder="Email Address" required><input type="tel" name="Phone" placeholder="Phone Number" required>
-          <select name="Enquiry_Type" required><option value="" disabled selected>-- Select Enquiry Type --</option><option value="Domestic Helper">Domestic Helper</option><option value="Office Cleaning">Office Cleaning</option><option value="Hospitality Staff">Hospitality Staff</option><option value="General Question">General Question</option></select>
-          <textarea name="Message" placeholder="Your message..." required></textarea><button type="submit">Submit</button>
-        </form><p id="enquiryStatus"></p>
-      </section>
-    </div>
+    <div id="page-home" class="page"><!-- Home content --></div>
+    <div id="page-about" class="page"><!-- About content --></div>
+    <div id="page-jobs" class="page"><section id="jobs"><h2>Available Jobs</h2><div id="jobsList" class="job-grid">Loading...</div></section></div>
+    <div id="page-enquiry" class="page"><!-- Enquiry form --></div>
   </main>
-  
   <div id="jobAppModal" class="modal">
     <div class="modal-content">
       <span id="closeModal">&times;</span><h2>Job Application</h2>
       <form id="jobAppForm">
         <input type="hidden" name="Position" id="jobPosition"><input type="hidden" name="Country" id="jobCountry"><input type="hidden" name="Job_ID" id="jobIdField">
-        <div><strong>Job ID: </strong><span id="modalJobId"></span></div><div><strong>Position: </strong><span id="modalPosition"></span></div><div><strong>Country: </strong><span id="modalCountry"></span></div><div><strong>Salary: </strong><span id="modalSalary"></span></div><hr>
-        <input type="text" name="Applicant_Name" placeholder="Your Name" required><input type="tel" name="Applicant_Phone" placeholder="Phone Number" required><input type="email" name="Applicant_Email" placeholder="Email" required>
-        <textarea name="Applicant_Message" placeholder="Why are you suitable for this job?" required></textarea><button type="submit">Apply Now</button>
+        <div id="modalJobDetails"></div><hr>
+        <input type="text" name="Applicant_Name" placeholder="Your Name" required><input type="tel" name="Applicant_Phone" placeholder="Phone" required><input type="email" name="Applicant_Email" placeholder="Email" required>
+        <textarea name="Applicant_Message" placeholder="Your message..." required></textarea>
+        <label for="resume" style="margin-top: 12px; display: block;">Upload Resume (Required)</label>
+        <input type="file" name="resume" id="resume" required>
+        <button type="submit">Apply Now</button>
       </form><p id="jobAppStatus"></p>
     </div>
   </div>
+  <!-- Template content for pages (to keep body clean) -->
+  <template id="home-template"><section class="hero"><h1 id="heroTitle"></h1><p id="heroTagline"></p></section><section id="services"><h2>Our Services</h2><div class="service-grid"><div class="service-card">✔️ Domestic Helpers</div><div class="service-card">✔️ Office Cleaners</div><div class="service-card">✔️ Hospitality Staff</div></div></section></template>
+  <template id="about-template"><section id="about"><h2>About Us</h2><div class="about-grid"><div class="about-mission"><h3>Our Mission</h3><p id="aboutMission"></p></div><div class="about-vision"><h3>Our Vision</h3><p id="aboutVision"></p></div></div><h3 id="whyChooseUsTitle"></h3><div id="aboutPoints" class="about-points-grid"></div><hr style="margin:32px 0"><h3>Contact & Company Info</h3><div class="owner-profile"><img src="murali.jpeg" alt="Owner"><div class="owner-details"><p><strong>Owner:</strong> <span id="owner"></span> (<span id="role"></span>)</p><p class="contact-info" id="contactEmail"></p><p class="contact-info" id="phone"></p><p><strong>Address:</strong> <span id="address"></span></p></div></div></section></template>
+  <template id="enquiry-template"><section id="enquiry"><h2>Send an Enquiry</h2><form id="enquiryForm"><input type="text" name="Full_Name" placeholder="Full Name" required><input type="email" name="Email" placeholder="Email" required><input type="tel" name="Phone" placeholder="Phone" required><select name="Enquiry_Type" required><option value="" disabled selected>-- Select Enquiry Type --</option><option value="Domestic Helper">Domestic Helper</option><option value="Office Cleaning">Office Cleaning</option><option value="Hospitality Staff">Hospitality Staff</option><option value="General Question">General Question</option></select><textarea name="Message" placeholder="Your message..." required></textarea><button type="submit">Submit</button></form><p id="enquiryStatus"></p></section></template>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRb-_r_EE7qkQQtWBjtLxP3PWECSsagYQCDWnCf5Rn6WKfG2r-NKeJL2a2AUcuv968/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjuV9XekfJFyNl-smCKem8NH5e3KWhNRhKzBPiiwdRDcSX4NdCs5drA45HhXUFmBTP/exec";
 
     document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.sidebar-nav-link'); const pages = document.querySelectorAll('.page');
-      function navigate(pageId) { pages.forEach(p => p.classList.remove('active')); document.getElementById(`page-${pageId}`).classList.add('active'); links.forEach(l => { l.classList.remove('active'); if (l.dataset.page === pageId) l.classList.add('active'); }); }
-      links.forEach(link => link.addEventListener('click', e => { e.preventDefault(); navigate(link.dataset.page); }));
+      // Setup pages from templates
+      document.getElementById('page-home').innerHTML = document.getElementById('home-template').innerHTML;
+      document.getElementById('page-about').innerHTML = document.getElementById('about-template').innerHTML;
+      document.getElementById('page-enquiry').innerHTML = document.getElementById('enquiry-template').innerHTML;
+      
+      const links=document.querySelectorAll('.sidebar-nav-link'),pages=document.querySelectorAll('.page');
+      function navigate(pageId){pages.forEach(p=>p.classList.remove('active'));document.getElementById(`page-${pageId}`).classList.add('active');links.forEach(l=>{l.classList.remove('active');if(l.dataset.page===pageId)l.classList.add('active')})}
+      links.forEach(link=>link.addEventListener('click',e=>{e.preventDefault();navigate(link.dataset.page)}));
       navigate('home');
       loadData();
+      // Re-attach form listener after template is loaded
+      document.getElementById("enquiryForm").addEventListener("submit", handleFormSubmit);
     });
 
-    function parseDMYDate(dateString) { const p = (dateString || '').split('/'); return p.length === 3 ? new Date(p[2], p[1] - 1, p[0]) : null; }
-    function applyTheme(themes, aboutData) {
-      const today = new Date(); today.setHours(0, 0, 0, 0); let themeApplied = false;
-      if (themes && themes.length > 0) {
-        for (const theme of themes) {
-          const start = parseDMYDate(theme.StartDate), end = parseDMYDate(theme.EndDate);
-          if (start && end && today >= start && today <= end) {
-            const css = `theme-${(theme.ThemeName || '').replace(/\s+/g, '').toLowerCase()}`;
-            document.body.classList.add(css); document.querySelector('.sidebar').classList.add(css);
-            document.getElementById("heroTitle").textContent = theme.WelcomeMessage;
-            themeApplied = true; break;
-          }
-        }
-      }
-      if (!themeApplied) document.getElementById("heroTitle").textContent = aboutData.CompanyName || "Welcome";
-    }
+    function parseDMYDate(dateString){const p=(dateString||'').split('/');return p.length===3?new Date(p[2],p[1]-1,p[0]):null}
+    function applyTheme(themes,aboutData){const today=new Date();today.setHours(0,0,0,0);let themeApplied=!1;if(themes&&themes.length>0){for(const theme of themes){const start=parseDMYDate(theme.StartDate),end=parseDMYDate(theme.EndDate);if(start&&end&&today>=start&&today<=end){const css=`theme-${(theme.ThemeName||'').replace(/\s+/g,'').toLowerCase()}`;document.body.classList.add(css);document.querySelector('.sidebar').classList.add(css);document.getElementById("heroTitle").textContent=theme.WelcomeMessage;themeApplied=!0;break}}}if(!themeApplied)document.getElementById("heroTitle").textContent=aboutData.CompanyName||"Welcome"}
 
-    async function loadData() {
-      try {
-        const uniqueUrl = APPS_SCRIPT_URL + "?t=" + new Date().getTime();
-        const res = await fetch(uniqueUrl);
-        if (!res.ok) { throw new Error(`Server responded with status ${res.status}. Check Apps Script deployment.`); }
-        const data = await res.json();
-        if (data.error) { throw new Error(`Apps Script Error: ${data.error}`); }
-        if (!data.About || data.About.length === 0) { throw new Error("The 'About' sheet has no data rows. Please fill in at least one row."); }
-        const about = data.About[0];
-        
-        applyTheme(data.Themes, about);
-        
-        document.getElementById("heroTagline").textContent = about.Slogan || '';
-        document.getElementById("aboutMission").textContent = about.OurMission || '';
-        document.getElementById("aboutVision").textContent = about.OurVision || '';
-        document.getElementById("whyChooseUsTitle").textContent = about.WhyChooseUs_Title || '';
-        document.getElementById("contactEmail").innerHTML = `<i class="fa-solid fa-envelope"></i> <a href="mailto:${about.EmailAddress || ''}">${about.EmailAddress || 'N/A'}</a>`;
-        document.getElementById("phone").innerHTML = `<i class="fa-solid fa-phone"></i> <a href="tel:${about.Whatsapp || ''}">${about.Whatsapp || 'N/A'}</a>`;
-        document.getElementById("address").textContent = about.Address || '';
-        document.getElementById("owner").textContent = about.Owner || '';
-        document.getElementById("role").textContent = about.Role || '';
-        
-        const pointsContainer = document.getElementById("aboutPoints");
-        pointsContainer.innerHTML = '';
-        for (let i = 1; i <= 3; i++) {
-          if (about[`Point${i}_Text`]) {
-            const pointCard = document.createElement('div');
-            pointCard.className = 'about-point-card';
-            pointCard.innerHTML = `<div class="icon">${about[`Point${i}_Icon`]}</div><p>${about[`Point${i}_Text`]}</p>`;
-            pointsContainer.appendChild(pointCard);
-          }
-        }
-        
-        const jobsDiv = document.getElementById("jobsList");
-        jobsDiv.innerHTML = "";
-        (data.Jobs || []).forEach((job) => {
-          const card = document.createElement("div");
-          card.className = "job-card";
-          const availability = job.Availability || 'Pending';
-          const availabilityClass = `status-${availability.toLowerCase()}`;
-          card.innerHTML = `<span class="availability-badge ${availabilityClass}">${availability}</span><h3>${job.Position || 'N/A'}</h3><p><strong>Country:</strong> ${job.Worker_Country || 'N/A'}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD || 'N/A'}</p><p>${job.Job_Description || 'No description provided.'}</p><button class="applyBtn">Apply</button>`;
-          card.querySelector('.applyBtn').addEventListener('click', () => openJobAppModal(job));
-          jobsDiv.appendChild(card);
-        });
+    async function loadData(){try{const uniqueUrl=APPS_SCRIPT_URL+"?t="+new Date().getTime();const res=await fetch(uniqueUrl);if(!res.ok)throw new Error(`Server responded with status ${res.status}. Check Apps Script deployment.`);const data=await res.json();if(data.error)throw new Error(`Apps Script Error: ${data.error}`);if(!data.About||data.About.length===0)throw new Error("The 'About' sheet has no data rows.");const about=data.About[0];applyTheme(data.Themes,about);document.getElementById("heroTagline").textContent=about.Slogan||'';document.getElementById("aboutMission").textContent=about.OurMission||'';document.getElementById("aboutVision").textContent=about.OurVision||'';document.getElementById("whyChooseUsTitle").textContent=about.WhyChooseUs_Title||'';document.getElementById("contactEmail").innerHTML=`<i class="fa-solid fa-envelope"></i> <a href="mailto:${about.EmailAddress||''}">${about.EmailAddress||'N/A'}</a>`;document.getElementById("phone").innerHTML=`<i class="fa-solid fa-phone"></i> <a href="tel:${about.Whatsapp||''}">${about.Whatsapp||'N/A'}</a>`;document.getElementById("address").textContent=about.Address||'';document.getElementById("owner").textContent=about.Owner||'';document.getElementById("role").textContent=about.Role||'';const pointsContainer=document.getElementById("aboutPoints");pointsContainer.innerHTML='';for(let i=1;i<=3;i++){if(about[`Point${i}_Text`]){const pointCard=document.createElement('div');pointCard.className='about-point-card';pointCard.innerHTML=`<div class="icon">${about[`Point${i}_Icon`]}</div><p>${about[`Point${i}_Text`]}</p>`;pointsContainer.appendChild(pointCard)}}
+    const jobsDiv=document.getElementById("jobsList");jobsDiv.innerHTML="";(data.Jobs||[]).forEach((job)=>{const card=document.createElement("div");card.className="job-card";const availability=job.Availability||'Pending';const availabilityClass=`status-${availability.toLowerCase()}`;const jobType=job.Type||'';card.innerHTML=`<div class="job-card-header"><h3>${job.Position||'N/A'}</h3><div class="job-card-badges"><span class="availability-badge ${availabilityClass}">${availability}</span>${jobType?`<span class="job-type-badge">${jobType}</span>`:''}</div></div><p style="font-size:0.9em;color:#6c757d;"><strong>Job ID:</strong> ${job.Job_ID||'N/A'}</p><p><strong>Country:</strong> ${job.Worker_Country||'N/A'}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD||'N/A'}</p><p>${job.Job_Description||'No description provided.'}</p><button class="applyBtn">Apply</button>`;card.querySelector('.applyBtn').addEventListener('click',()=>openJobAppModal(job));jobsDiv.appendChild(card)})}catch(err){console.error("Critical Error:",err);document.querySelector('.main-content').innerHTML=`<div class="page active" style="padding:40px;text-align:center;"><h2>An Error Occurred</h2><p style="color:red;font-weight:bold;">Could not load website data.</p><p><em>Error: ${err.message}</em></p></div>`}}
 
-      } catch (err) {
-        console.error("Critical Error in loadData:", err);
-        document.querySelector('.main-content').innerHTML = `<div class="page active" style="padding: 40px; text-align: center;"><h2>An Error Occurred</h2><p style="color: red; font-weight: bold;">Could not load website data.</p><p><strong>Please check the following:</strong></p><ol style="text-align: left; display: inline-block;"><li>The Apps Script URL is correct & recently deployed.</li><li>The Google Sheet has the correct headers.</li><li>The 'About' sheet has at least one row of data.</li></ol><p><em>Error message: ${err.message}</em></p></div>`;
-      }
+    function openJobAppModal(job){
+        const detailsDiv = document.getElementById('modalJobDetails');
+        detailsDiv.innerHTML = `
+            <div><strong>Job ID: </strong><span>${job.Job_ID || 'N/A'}</span></div>
+            <div><strong>Position: </strong><span>${job.Position || 'N/A'}</span></div>
+            <div><strong>Country: </strong><span>${job.Worker_Country || 'N/A'}</span></div>
+            <div><strong>Salary: </strong><span>SGD ${job.Monthly_Salary_SGD || 'N/A'}</span></div>
+            <div><strong>Type: </strong><span>${job.Type || 'N/A'}</span></div>
+            <div><strong>Accommodation: </strong><span>${job.Accommodation || 'N/A'}</span></div>
+            <div><strong>Work Pattern: </strong><span>${job.WorkDayPattern || 'N/A'}</span></div>
+        `;
+        document.getElementById('jobIdField').value=job.Job_ID||'';
+        document.getElementById('jobPosition').value=job.Position||'';
+        document.getElementById('jobCountry').value=job.Worker_Country||'';
+        document.getElementById('jobAppStatus').textContent="";
+        document.getElementById('jobAppModal').style.display="block";
     }
+    document.getElementById('closeModal').onclick=()=>{document.getElementById('jobAppModal').style.display="none"};
+    window.onclick=(e)=>{if(e.target==document.getElementById('jobAppModal')){e.target.style.display="none"}};
     
-    function openJobAppModal(job) {
-      document.getElementById('jobIdField').value = job.Job_ID || 'N/A'; document.getElementById('modalJobId').textContent = job.Job_ID || 'N/A';
-      document.getElementById('jobPosition').value = job.Position || ''; document.getElementById('modalPosition').textContent = job.Position || '';
-      document.getElementById('jobCountry').value = job.Worker_Country || ''; document.getElementById('modalCountry').textContent = job.Worker_Country || '';
-      document.getElementById('modalSalary').textContent = "SGD " + (job.Monthly_Salary_SGD || 'N/A');
-      document.getElementById('jobAppStatus').textContent = ""; document.getElementById('jobAppModal').style.display = "block";
+    document.getElementById("jobAppForm").addEventListener("submit", handleFormSubmit);
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const statusElement = form.id === 'jobAppForm' ? document.getElementById("jobAppStatus") : document.getElementById("enquiryStatus");
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      const fileInput = form.querySelector('input[type="file"]');
+      if (fileInput && fileInput.files.length > 0) {
+        // Handle file upload form
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const fileData = e.target.result.split(',')[1]; // Get base64 data
+          const formData = new FormData(form);
+          const obj = {};
+          formData.forEach((v,k) => obj[k] = v);
+          obj.fileData = fileData;
+          obj.fileName = file.name;
+          obj.fileType = file.type;
+          sendData({ type: "job_application", data: obj });
+        };
+        reader.readAsDataURL(file);
+        statusElement.textContent = "Uploading resume and submitting...";
+        submitButton.disabled = true;
+      } else {
+        // Handle standard form
+        const formData = new FormData(form);
+        const obj = {};
+        formData.forEach((v,k) => obj[k] = v);
+        sendData({ type: "enquiry", data: obj });
+        statusElement.textContent = "Submitting...";
+        submitButton.disabled = true;
+      }
+
+      async function sendData(payload) {
+        try {
+          await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
+          statusElement.textContent = "Submitted successfully!";
+          form.reset();
+        } catch (err) {
+          statusElement.textContent = "Error submitting application.";
+          console.error(err);
+        } finally {
+          submitButton.disabled = false;
+        }
+      }
     }
-    document.getElementById('closeModal').onclick = () => { document.getElementById('jobAppModal').style.display = "none"; };
-    window.onclick = (e) => { if (e.target == document.getElementById('jobAppModal')) { e.target.style.display = "none"; }};
-    document.getElementById("jobAppForm").addEventListener("submit", async e => { e.preventDefault(); const form = e.target; const formData = new FormData(form); const obj = {}; formData.forEach((v,k) => obj[k] = v); try { await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "job_application", data: obj }) }); document.getElementById("jobAppStatus").textContent = "Application submitted successfully!"; form.reset(); } catch { document.getElementById("jobAppStatus").textContent = "Error submitting application."; } });
-    document.getElementById("enquiryForm").addEventListener("submit", async e => { e.preventDefault(); const form = e.target; const formData = new FormData(form); const obj = {}; formData.forEach((v,k) => obj[k] = v); try { await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify({ type: "enquiry", data: obj }) }); document.getElementById("enquiryStatus").textContent = "Enquiry sent successfully!"; form.reset(); } catch { document.getElementById("enquiryStatus").textContent = "Error sending enquiry."; } });
   </script>
 </body>
 </html>
