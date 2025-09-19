@@ -21,7 +21,7 @@
   <template id="enquiry-template">...</template>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQg-WtBT3JQ_tgPr00sJ5xsAATzwzBrOpwIsojCcc_v0pFECQupTbbUEPAwxJ9v6qg/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeo-u-BYdXOxu_GC7bnCEZuSLyg2Ys1VjT14l6ozXwBsbeev1d9eY6N4nV7kdTRKhU/exec";
     // --- SECURITY: Change this to the EXACT SAME random string as in your Code.gs ---
     const SECRET_TOKEN = "MyLivingTestamentAgency1234567890";
 
@@ -65,7 +65,7 @@
   <template id="jobs-template"><section id="jobs"><h2>Available Jobs</h2><div id="jobsList" class="job-grid">Loading...</div></section></template>
   <template id="enquiry-template"><section id="enquiry"><h2>Send an Enquiry</h2><form id="enquiryForm"><input type="text" name="Full_Name" placeholder="Full Name" required><input type="email" name="Email" placeholder="Email" required><input type="tel" name="Phone" placeholder="Phone" required><select name="Enquiry_Type" required><option value="" disabled selected>-- Select Enquiry Type --</option><option value="Domestic Helper">Domestic Helper</option><option value="Office Cleaning">Office Cleaning</option><option value="Hospitality Staff">Hospitality Staff</option><option value="General Question">General Question</option></select><textarea name="Message" placeholder="Your message..." required></textarea><button type="submit">Submit</button></form><p id="enquiryStatus"></p></section></template>
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQg-WtBT3JQ_tgPr00sJ5xsAATzwzBrOpwIsojCcc_v0pFECQupTbbUEPAwxJ9v6qg/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeo-u-BYdXOxu_GC7bnCEZuSLyg2Ys1VjT14l6ozXwBsbeev1d9eY6N4nV7kdTRKhU/exec";
     const SECRET_TOKEN = "MyLivingTestamentAgency1234567890";
     document.addEventListener('keydown', function(e){if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&e.key==='I')||(e.ctrlKey&&e.shiftKey&&e.key==='J')||(e.ctrlKey&&e.key==='U')){e.preventDefault()}});
     document.addEventListener('DOMContentLoaded',()=>{document.querySelector('.sidebar').innerHTML=document.getElementById('sidebar-template').innerHTML;document.querySelector('#jobAppModal').innerHTML=document.getElementById('modal-template').innerHTML;document.getElementById('page-home').innerHTML=document.getElementById('home-template').innerHTML;document.getElementById('page-about').innerHTML=document.getElementById('about-template').innerHTML;document.getElementById('page-jobs').innerHTML=document.getElementById('jobs-template').innerHTML;document.getElementById('page-enquiry').innerHTML=document.getElementById('enquiry-template').innerHTML;setupNavigation();loadData();document.getElementById("jobAppForm").addEventListener("submit",handleFormSubmit);document.getElementById("enquiryForm").addEventListener("submit",handleFormSubmit);document.getElementById('closeModal').onclick=()=>{document.getElementById('jobAppModal').style.display="none"};window.onclick=e=>{if(e.target==document.getElementById('jobAppModal'))e.target.style.display="none"}});
