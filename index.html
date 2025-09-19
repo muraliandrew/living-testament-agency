@@ -6,45 +6,58 @@
 </head>
 <body oncontextmenu="return false;">
 
-  <nav class="sidebar"></nav>
+  <header class="site-header"></header>
+  
   <main class="main-content">
-    <div id="page-home" class="page"></div><div id="page-about" class="page"></div><div id="page-jobs" class="page"></div><div id="page-enquiry" class="page"></div>
+    <div id="page-home" class="page"></div>
+    <div id="page-about" class="page"></div>
+    <div id="page-jobs" class="page"></div>
+    <div id="page-enquiry" class="page"></div>
   </main>
+  
+  <footer class="site-footer"></footer>
+  
   <div id="jobAppModal" class="modal"></div>
 
-  <!-- All page content is built from these templates -->
-  <template id="sidebar-template"><div class="sidebar-logo"><img src="LTA.jpeg" alt="Agency Logo"></div><div class="sidebar-details" id="sidebarDetails"></div><ul class="sidebar-nav"><li><a href="#" class="sidebar-nav-link" data-page="home">Home</a></li><li><a href="#" class="sidebar-nav-link" data-page="about">About Us</a></li><li><a href="#" class="sidebar-nav-link" data-page="jobs">Available Jobs</a></li><li><a href="#" class="sidebar-nav-link" data-page="enquiry">Enquiry</a></li></ul></template>
-  <template id="modal-template"><div class="modal-content"><span id="closeModal">&times;</span><h2>Job Application</h2><form id="jobAppForm"><input type="hidden" name="Position" id="jobPosition"><input type="hidden" name="Citizenship" id="jobCitizenship"><input type="hidden" name="Job_ID" id="jobIdField"><div id="modalJobDetails"></div><hr><input type="text" name="Applicant_Name" placeholder="Your Name" required><input type="tel" name="Applicant_Phone" placeholder="Phone" required><input type="email" name="Applicant_Email" placeholder="Email" required><textarea name="Applicant_Message" placeholder="Your message..." required></textarea><label for="resume" style="margin-top:12px;display:block;">Upload Resume (PDF, DOC, DOCX)</label><input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" required><button type="submit">Apply Now</button></form><p id="jobAppStatus"></p></div></template>
+  <!-- TEMPLATES -->
+  <template id="header-template">
+    <div class="site-logo"><img src="LTA.jpeg" alt="Agency Logo"></div>
+    <div class="site-details" id="headerDetails"></div>
+    <ul class="main-nav">
+      <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+      <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+      <li><a href="#" class="nav-link" data-page="jobs">Available Jobs</a></li>
+      <li><a href="#" class="nav-link" data-page="enquiry">Enquiry</a></li>
+    </ul>
+  </template>
+  <template id="footer-template">
+    <p>Copyrights &copy; <span id="copyright-year"></span> reserved disclaimer by living agency</p>
+    <p>by murali andrew</p>
+  </template>
+
+  <!-- (All other templates: modal, home, about, jobs, enquiry are the same as the last working version) -->
+  <template id="modal-template"><div class="modal-content"><span id="closeModal">&times;</span><h2>Job Application</h2><form id="jobAppForm"><input type="hidden" name="Position" id="jobPosition"><input type="hidden" name="Citizenship" id="jobCitizenshipField"><input type="hidden" name="Job_ID" id="jobIdField"><div id="modalJobDetails"></div><hr><input type="text" name="Applicant_Name" placeholder="Your Name" required><input type="tel" name="Applicant_Phone" placeholder="Phone" required><input type="email" name="Applicant_Email" placeholder="Email" required><textarea name="Applicant_Message" placeholder="Your message..." required></textarea><label for="resume" style="margin-top:12px;display:block;">Upload Resume (PDF, DOC, DOCX)</label><input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" required><button type="submit">Apply Now</button></form><p id="jobAppStatus"></p></div></template>
   <template id="home-template"><section class="hero"><h1 id="heroTitle"></h1><p id="heroTagline"></p><div class="hero-cta"><a href="#" class="button nav-button" data-page="enquiry">Find Staff Now</a><a href="#" class="button nav-button" data-page="jobs">View Open Jobs</a></div></section><section id="stats" class="stats-counter"></section><section id="services"><h2>Our Services</h2><div class="service-grid"></div></section><section id="process"><h2>Our Simple Process</h2><div class="process-flow"></div></section><section id="featured-jobs"><h2>Featured Jobs</h2><div id="featuredJobsList" class="job-grid"></div></section><section id="testimonials"><h2>What Our Clients Say</h2><div id="testimonialsList"></div></section></template>
   <template id="about-template"><section id="about"><h2>About Us</h2><div class="about-grid"><div class="about-mission"><h3>Our Mission</h3><p id="aboutMission"></p></div><div class="about-vision"><h3>Our Vision</h3><p id="aboutVision"></p></div></div><h3 id="whyChooseUsTitle"></h3><div id="aboutPoints" class="about-points-grid"></div><hr style="margin:32px 0"><h3>Contact & Company Info</h3><div class="owner-profile"><img src="murali.jpeg" alt="Owner"><div class="owner-details"><p><strong>Owner:</strong><span id="owner"></span>(<span id="role"></span>)</p><p class="contact-info" id="contactEmail"></p><p class="contact-info" id="phone"></p><p><strong>Address:</strong><span id="address"></span></p></div></div></section></template>
   <template id="jobs-template"><section id="jobs"><h2>Available Jobs</h2><div id="jobsList" class="job-grid">Loading...</div></section></template>
   <template id="enquiry-template"><section id="enquiry"><h2>Send an Enquiry</h2><form id="enquiryForm"><input type="text" name="Full_Name" placeholder="Full Name" required><input type="email" name="Email" placeholder="Email" required><input type="tel" name="Phone" placeholder="Phone" required><select name="Enquiry_Type" required><option value="" disabled selected>-- Select Enquiry Type --</option><option value="Domestic Helper">Domestic Helper</option><option value="Office Cleaning">Office Cleaning</option><option value="Hospitality Staff">Hospitality Staff</option><option value="General Question">General Question</option></select><textarea name="Message" placeholder="Your message..." required></textarea><button type="submit">Submit</button></form><p id="enquiryStatus"></p></section></template>
 
   <script>
-    // =========================================================================
-    // --- CONFIGURATION: PASTE YOUR NEW DEPLOYMENT URL BELOW ---
-    // =========================================================================
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_ivGrMl4PhfNINlEhoRvbZyJwurAFv6-RrD7KOrPnL7uZ8rqCSTG9STB-sohkPxIl/exec";
     const SECRET_TOKEN = "MyLivingTestamentAgency1234567890";
-    // =========================================================================
 
-    // --- SECURITY: Deter code copying ---
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-        e.preventDefault();
-      }
-    });
-
-    // --- SETUP & NAVIGATION ---
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('.sidebar').innerHTML = document.getElementById('sidebar-template').innerHTML;
+      // Build UI from templates
+      document.querySelector('.site-header').innerHTML = document.getElementById('header-template').innerHTML;
+      document.querySelector('.site-footer').innerHTML = document.getElementById('footer-template').innerHTML;
       document.querySelector('#jobAppModal').innerHTML = document.getElementById('modal-template').innerHTML;
       document.getElementById('page-home').innerHTML = document.getElementById('home-template').innerHTML;
       document.getElementById('page-about').innerHTML = document.getElementById('about-template').innerHTML;
       document.getElementById('page-jobs').innerHTML = document.getElementById('jobs-template').innerHTML;
       document.getElementById('page-enquiry').innerHTML = document.getElementById('enquiry-template').innerHTML;
       
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
       setupNavigation();
       loadData();
       
@@ -55,44 +68,24 @@
     });
 
     function setupNavigation() {
-      const links = document.querySelectorAll('.sidebar-nav-link');
+      const links = document.querySelectorAll('.nav-link');
       const pages = document.querySelectorAll('.page');
       window.navigate = function(pageId) {
         pages.forEach(p => p.classList.remove('active'));
         document.getElementById(`page-${pageId}`).classList.add('active');
         links.forEach(l => { l.classList.remove('active'); if (l.dataset.page === pageId) l.classList.add('active'); });
-        document.querySelector('.main-content').scrollTop = 0;
+        window.scrollTo(0, 0); // Scroll to top on page change
       };
       links.forEach(link => link.addEventListener('click', e => { e.preventDefault(); navigate(link.dataset.page); }));
-      document.body.addEventListener('click', e => {
-        if (e.target.matches('.nav-button')) { e.preventDefault(); navigate(e.target.dataset.page); }
-      });
+      document.body.addEventListener('click', e => { if (e.target.matches('.nav-button')) { e.preventDefault(); navigate(e.target.dataset.page); } });
       navigate('home');
     }
 
-    // --- THEME & DATE LOGIC ---
-    function parseDMYDate(dateString) { const p = (dateString || '').split('/'); return p.length === 3 ? new Date(Date.UTC(p[2], p[1] - 1, p[0])) : null; }
-    function applyTheme(themes, aboutData) {
-      const today = new Date();
-      const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
-      let themeApplied = false;
-      if (themes && themes.length > 0) {
-        for (const theme of themes) {
-          const start = parseDMYDate(theme.StartDate), end = parseDMYDate(theme.EndDate);
-          if (start && end && todayUTC >= start && todayUTC <= end) {
-            const css = `theme-${(theme.ThemeName || '').replace(/\s+/g, '').toLowerCase()}`;
-            document.body.classList.add(css);
-            document.querySelector('.sidebar').classList.add(css);
-            document.getElementById("heroTitle").textContent = theme.WelcomeMessage;
-            themeApplied = true;
-            break;
-          }
-        }
-      }
-      if (!themeApplied) document.getElementById("heroTitle").textContent = aboutData.CompanyName || "Welcome";
-    }
+    // --- (Theme logic is unchanged) ---
+    function parseDMYDate(dateString){const p=(dateString||'').split('/');return p.length===3?new Date(Date.UTC(p[2],p[1]-1,p[0])):null}
+    function applyTheme(themes,aboutData){const today=new Date();const todayUTC=new Date(Date.UTC(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate()));let themeApplied=!1;if(themes&&themes.length>0){for(const theme of themes){const start=parseDMYDate(theme.StartDate),end=parseDMYDate(theme.EndDate);if(start&&end&&todayUTC>=start&&todayUTC<=end){const css=`theme-${(theme.ThemeName||'').replace(/\s+/g,'').toLowerCase()}`;document.body.classList.add(css);document.querySelector('.sidebar').classList.add(css);document.getElementById("heroTitle").textContent=theme.WelcomeMessage;themeApplied=!0;break}}}if(!themeApplied)document.getElementById("heroTitle").textContent=aboutData.CompanyName||"Welcome"}
 
-    // --- CORE DATA LOADING FUNCTION ---
+    // --- CORE DATA LOADING FUNCTION (with WhatsApp update) ---
     async function loadData() {
       try {
         const uniqueUrl = `${APPS_SCRIPT_URL}?t=${new Date().getTime()}&token=${SECRET_TOKEN}`;
@@ -105,92 +98,31 @@
         
         applyTheme(data.Themes, about);
         
-        document.getElementById("sidebarDetails").textContent = about.MoreDetails || '';
-        document.getElementById("heroTagline").textContent = about.Slogan || '';
-        const statsContainer = document.getElementById("stats"); statsContainer.innerHTML = '';
-        for (let i = 1; i <= 3; i++) { if (about[`Stat${i}_Number`]) { const statItem = document.createElement('div'); statItem.className = 'stat-item'; statItem.innerHTML = `<div class="number">${about[`Stat${i}_Number`]}</div><div class="text">${about[`Stat${i}_Text`]}</div>`; statsContainer.appendChild(statItem); } }
-        document.querySelector('#services .service-grid').innerHTML = `<div class="service-card"><h3><i class="fa-solid fa-house-chimney-user"></i> Domestic Helpers</h3><p>Find reliable help for a harmonious home.</p></div><div class="service-card"><h3><i class="fa-solid fa-building"></i> Office Cleaners</h3><p>Ensure a clean and productive workspace.</p></div><div class="service-card"><h3><i class="fa-solid fa-concierge-bell"></i> Hospitality Staff</h3><p>Source skilled staff for your hotel or event.</p></div>`;
-        document.querySelector('#process .process-flow').innerHTML = `<div class="process-step"><h3>1. Consultation</h3><p>Discuss your specific needs with us.</p></div><div class="process-step"><h3>2. Matching</h3><p>We source and vet the best candidates.</p></div><div class="process-step"><h3>3. Placement</h3><p>We handle all logistics for a smooth placement.</p></div>`;
+        document.getElementById("headerDetails").textContent = about.MoreDetails || '';
+
+        // --- UPDATED WhatsApp Link Logic (Flexible) ---
+        const phoneElement = document.getElementById("phone");
+        const whatsappNumber = about.Whatsapp; // Using the single 'Whatsapp' column
+        if (whatsappNumber) {
+          // The link is created using the full international number from the sheet
+          // The text of the link is also the full number
+          phoneElement.innerHTML = `<i class="fa-solid fa-phone"></i> <a href="https://wa.me/${whatsappNumber}" target="_blank">${whatsappNumber}</a>`;
+        } else {
+          phoneElement.innerHTML = `<i class="fa-solid fa-phone"></i> N/A`;
+        }
         
-        const featuredJobs = (data.Jobs || []).filter(job => String(job.IsFeatured).toLowerCase() === 'true');
-        const featuredJobsDiv = document.getElementById("featuredJobsList"); featuredJobsDiv.innerHTML = '';
-        if (featuredJobs.length > 0) {
-            featuredJobs.forEach(job => { const card = document.createElement("div"); card.className = "job-card"; card.innerHTML = `<h3>${job.Position || 'N/A'}</h3><p><strong>Citizenship:</strong> ${job.Worker_Citizenship || 'N/A'}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD || 'N/A'}</p><button class="nav-button" data-page="jobs">View Details</button>`; featuredJobsDiv.appendChild(card); });
-        } else { featuredJobsDiv.innerHTML = "<p>No featured jobs at the moment. Please see 'Available Jobs'.</p>"; }
-        
-        const featuredTestimonials = (data.Testimonials || []).filter(t => String(t.IsFeatured).toLowerCase() === 'true');
-        const testimonialsDiv = document.getElementById("testimonialsList"); testimonialsDiv.innerHTML = '';
-        featuredTestimonials.forEach(t => { const card = document.createElement('div'); card.className = 'testimonial-card'; const rating = parseInt(t.Rating, 10) || 0; let stars = ''; for (let i = 0; i < 5; i++) { stars += `<i class="fa-${i < rating ? 'solid' : 'regular'} fa-star"></i>`; } card.innerHTML = `<p class="quote">"${t.Quote}"</p><div class="testimonial-rating">${stars}</div><p class="author">- ${t.ClientName}</p>`; testimonialsDiv.appendChild(card); });
-        
-        document.getElementById("aboutMission").textContent = about.OurMission || ''; document.getElementById("aboutVision").textContent = about.OurVision || ''; document.getElementById("whyChooseUsTitle").textContent = about.WhyChooseUs_Title || ''; document.getElementById("contactEmail").innerHTML = `<i class="fa-solid fa-envelope"></i> <a href="mailto:${about.EmailAddress || ''}">${about.EmailAddress || 'N/A'}</a>`; document.getElementById("phone").innerHTML = `<i class="fa-solid fa-phone"></i> <a href="tel:${about.Whatsapp || ''}">${about.Whatsapp || 'N/A'}</a>`; document.getElementById("address").textContent = about.Address || ''; document.getElementById("owner").textContent = about.Owner || ''; document.getElementById("role").textContent = about.Role || '';
-        const pointsContainer = document.getElementById("aboutPoints"); pointsContainer.innerHTML = '';
-        for (let i = 1; i <= 3; i++) { if (about[`Point${i}_Text`]) { const pointCard = document.createElement('div'); pointCard.className = 'about-point-card'; pointCard.innerHTML = `<div class="icon">${about[`Point${i}_Icon`]}</div><p>${about[`Point${i}_Text`]}</p>`; pointsContainer.appendChild(pointCard); } }
-        
-        const jobsDiv = document.getElementById("jobsList"); jobsDiv.innerHTML = "";
-        (data.Jobs || []).forEach((job) => { const card = document.createElement("div"); card.className = "job-card"; const availability = job.Availability || 'Pending'; const availabilityClass = `status-${availability.toLowerCase()}`; const jobType = job.Type || ''; card.innerHTML = `<div class="job-card-header"><h3>${job.Position || 'N/A'}</h3><div class="job-card-badges"><span class="availability-badge ${availabilityClass}">${availability}</span>${jobType ? `<span class="job-type-badge">${jobType}</span>` : ''}</div></div><p style="font-size:0.9em;color:#6c757d;margin-top:-8px;margin-bottom:12px;"><strong>Job ID:</strong> ${job.Job_ID || 'N/A'}</p><p><strong>Citizenship:</strong> ${job.Worker_Citizenship || 'N/A'}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD || 'N/A'}</p><p><strong>Accommodation:</strong> ${job.Accommodation || 'N/A'}</p><p><strong>Work Pattern:</strong> ${job.WorkDayPattern || 'N/A'}</p><p><strong>Details:</strong> ${job.Gender || 'N/A'}, Age ${job.Age_Range || 'N/A'}</p><p>${job.Job_Description || 'No description provided.'}</p><button class="applyBtn">Apply</button>`; card.querySelector('.applyBtn').addEventListener('click', () => openJobAppModal(job)); jobsDiv.appendChild(card); });
+        // --- (Rest of the loadData function is the same) ---
+        document.getElementById("heroTagline").textContent = about.Slogan || ''; const statsContainer = document.getElementById("stats"); statsContainer.innerHTML = ''; for (let i = 1; i <= 3; i++) { if (about[`Stat${i}_Number`]) { const statItem = document.createElement('div'); statItem.className = 'stat-item'; statItem.innerHTML = `<div class="number">${about[`Stat${i}_Number`]}</div><div class="text">${about[`Stat${i}_Text`]}</div>`; statsContainer.appendChild(statItem); } }
+        document.querySelector('#services .service-grid').innerHTML = `<div class="service-card"><h3><i class="fa-solid fa-house-chimney-user"></i> Domestic Helpers</h3><p>Find reliable help for a harmonious home.</p></div><div class="service-card"><h3><i class="fa-solid fa-building"></i> Office Cleaners</h3><p>Ensure a clean, productive workspace.</p></div><div class="service-card"><h3><i class="fa-solid fa-concierge-bell"></i> Hospitality Staff</h3><p>Source skilled staff for your hotel or event.</p></div>`; document.querySelector('#process .process-flow').innerHTML = `<div class="process-step"><h3>1. Consultation</h3><p>Discuss your specific needs with us.</p></div><div class="process-step"><h3>2. Matching</h3><p>We source & vet the best candidates.</p></div><div class="process-step"><h3>3. Placement</h3><p>We handle logistics for a smooth placement.</p></div>`; const featuredJobs = (data.Jobs || []).filter(job => String(job.IsFeatured).toLowerCase() === 'true'); const featuredJobsDiv = document.getElementById("featuredJobsList"); featuredJobsDiv.innerHTML = ''; if (featuredJobs.length > 0) { featuredJobs.forEach(job => { const card = document.createElement("div"); card.className = "job-card"; card.innerHTML = `<h3>${job.Position || 'N/A'}</h3><p><strong>Citizenship:</strong> ${job.Worker_Citizenship || 'N/A'}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD || 'N/A'}</p><button class="nav-button" data-page="jobs">View Details</button>`; featuredJobsDiv.appendChild(card); }); } else { featuredJobsDiv.innerHTML = "<p>No featured jobs at the moment.</p>"; } const featuredTestimonials = (data.Testimonials || []).filter(t => String(t.IsFeatured).toLowerCase() === 'true'); const testimonialsDiv = document.getElementById("testimonialsList"); testimonialsDiv.innerHTML = ''; featuredTestimonials.forEach(t => { const card = document.createElement('div'); card.className = 'testimonial-card'; const rating = parseInt(t.Rating, 10) || 0; let stars = ''; for (let i = 0; i < 5; i++) { stars += `<i class="fa-${i < rating ? 'solid' : 'regular'} fa-star"></i>`; } card.innerHTML = `<p class="quote">"${t.Quote}"</p><div class="testimonial-rating">${stars}</div><p class="author">- ${t.ClientName}</p>`; testimonialsDiv.appendChild(card); }); document.getElementById("aboutMission").textContent = about.OurMission || ''; document.getElementById("aboutVision").textContent = about.OurVision || ''; document.getElementById("whyChooseUsTitle").textContent = about.WhyChooseUs_Title || ''; document.getElementById("contactEmail").innerHTML = `<i class="fa-solid fa-envelope"></i> <a href="mailto:${about.EmailAddress || ''}">${about.EmailAddress || 'N/A'}</a>`; document.getElementById("address").textContent = about.Address || ''; document.getElementById("owner").textContent = about.Owner || ''; document.getElementById("role").textContent = about.Role || ''; const pointsContainer = document.getElementById("aboutPoints"); pointsContainer.innerHTML = ''; for (let i = 1; i <= 3; i++) { if (about[`Point${i}_Text`]) { const pointCard = document.createElement('div'); pointCard.className = 'about-point-card'; pointCard.innerHTML = `<div class="icon">${about[`Point${i}_Icon`]}</div><p>${about[`Point${i}_Text`]}</p>`; pointsContainer.appendChild(pointCard); } }; const jobsDiv = document.getElementById("jobsList"); jobsDiv.innerHTML = ""; (data.Jobs || []).forEach((job) => { const card = document.createElement("div"); card.className = "job-card"; const availability = job.Availability || 'Pending'; const availabilityClass = `status-${availability.toLowerCase()}`; const jobType = job.Type || ''; card.innerHTML = `<div class="job-card-header"><h3>${job.Position || 'N/A'}</h3><div class="job-card-badges"><span class="availability-badge ${availabilityClass}">${availability}</span>${jobType ? `<span class="job-type-badge">${jobType}</span>` : ''}</div></div><p style="font-size:0.9em;color:#6c757d;margin-top:-8px;margin-bottom:12px;"><strong>Job ID:</strong> ${job.Job_ID || 'N/A'}</p><p><strong>Citizenship:</strong> ${job.Worker_Citizenship || 'N/A'}</p><p><strong>Salary:</strong> SGD ${job.Monthly_Salary_SGD || 'N/A'}</p><p><strong>Accommodation:</strong> ${job.Accommodation || 'N/A'}</p><p><strong>Work Pattern:</strong> ${job.WorkDayPattern || 'N/A'}</p><p><strong>Details:</strong> ${job.Gender || 'N/A'}, Age ${job.Age_Range || 'N/A'}</p><p>${job.Job_Description || 'No description provided.'}</p><button class="applyBtn">Apply</button>`; card.querySelector('.applyBtn').addEventListener('click', () => openJobAppModal(job)); jobsDiv.appendChild(card); });
       } catch (err) {
         console.error("Critical Error:", err);
-        document.querySelector('.main-content').innerHTML = `<div class="page active" style="padding:40px;text-align:center;"><h2>An Error Occurred</h2><p style="color:red;font-weight:bold;">Could not load website data.</p><p><strong>Please check the following:</strong></p><ol style="text-align: left; display: inline-block;"><li>The Apps Script URL is correct & recently deployed.</li><li>The Google Sheet has the correct headers.</li><li>The 'About' sheet has at least one row of data.</li></ol><p><em>Error message: ${err.message}</em></p></div>`;
+        document.querySelector('.main-content').innerHTML = `<div class="page active" style="padding:40px;text-align:center;"><h2>An Error Occurred</h2><p style="color:red;font-weight:bold;">Could not load website data.</p><p><em>Error: ${err.message}</em></p></div>`;
       }
     }
-
-    // --- MODAL & FORM SUBMISSION LOGIC ---
-    function openJobAppModal(job) {
-      const detailsDiv = document.getElementById('modalJobDetails');
-      detailsDiv.innerHTML = `<div><strong>Job ID:</strong><span>${job.Job_ID || 'N/A'}</span></div><div><strong>Position:</strong><span>${job.Position || 'N/A'}</span></div><div><strong>Type:</strong><span>${job.Type || 'N/A'}</span></div><div><strong>Salary:</strong><span>SGD ${job.Monthly_Salary_SGD || 'N/A'}</span></div>`;
-      document.getElementById('jobIdField').value = job.Job_ID || '';
-      document.getElementById('jobPosition').value = job.Position || '';
-      document.getElementById('jobCitizenship').value = job.Worker_Citizenship || '';
-      document.getElementById('jobAppStatus').textContent = "";
-      document.getElementById('jobAppModal').style.display = "block";
-    }
-
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const statusElement = form.id === 'jobAppForm' ? document.getElementById("jobAppStatus") : document.getElementById("enquiryStatus");
-      const submitButton = form.querySelector('button[type="submit"]');
-      const fileInput = form.querySelector('input[type="file"]');
-
-      if (fileInput && fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const fileData = e.target.result.split(',')[1];
-          const formData = new FormData(form);
-          const obj = {};
-          formData.forEach((v, k) => obj[k] = v);
-          obj.fileData = fileData;
-          obj.fileName = file.name;
-          obj.fileType = file.type;
-          sendData({ type: "job_application", data: obj });
-        };
-        reader.readAsDataURL(file);
-        statusElement.textContent = "Uploading and submitting...";
-        submitButton.disabled = true;
-      } else {
-        const formData = new FormData(form);
-        const obj = {};
-        formData.forEach((v, k) => obj[k] = v);
-        sendData({ type: "enquiry", data: obj });
-        statusElement.textContent = "Submitting...";
-        submitButton.disabled = true;
-      }
-
-      async function sendData(payload) {
-        try {
-          await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
-          statusElement.textContent = "Submitted successfully!";
-          form.reset();
-        } catch (err) {
-          statusElement.textContent = "Error submitting application.";
-          console.error(err);
-        } finally {
-          submitButton.disabled = false;
-        }
-      }
-    }
+    
+    // --- (Modal & Form Submission logic is unchanged) ---
+    function openJobAppModal(job){const detailsDiv=document.getElementById('modalJobDetails');detailsDiv.innerHTML=`<div><strong>Job ID:</strong><span>${job.Job_ID||'N/A'}</span></div><div><strong>Position:</strong><span>${job.Position||'N/A'}</span></div><div><strong>Citizenship:</strong><span>${job.Worker_Citizenship||'N/A'}</span></div><div><strong>Type:</strong><span>${job.Type||'N/A'}</span></div><div><strong>Salary:</strong><span>SGD ${job.Monthly_Salary_SGD||'N/A'}</span></div>`;document.getElementById('jobIdField').value=job.Job_ID||'';document.getElementById('jobPosition').value=job.Position||'';document.getElementById('jobCitizenshipField').value=job.Worker_Citizenship||'';document.getElementById('jobAppStatus').textContent="";document.getElementById('jobAppModal').style.display="block"}
+    function handleFormSubmit(e){e.preventDefault();const form=e.target;const statusElement=form.id==='jobAppForm'?document.getElementById("jobAppStatus"):document.getElementById("enquiryStatus");const submitButton=form.querySelector('button[type="submit"]');const fileInput=form.querySelector('input[type="file"]');if(fileInput&&fileInput.files.length>0){const file=fileInput.files[0];const reader=new FileReader();reader.onload=function(e){const fileData=e.target.result.split(',')[1];const formData=new FormData(form);const obj={};formData.forEach((v,k)=>obj[k]=v);obj.fileData=fileData;obj.fileName=file.name;obj.fileType=file.type;sendData({type:"job_application",data:obj})};reader.readAsDataURL(file);statusElement.textContent="Uploading...";submitButton.disabled=!0}else{const formData=new FormData(form);const obj={};formData.forEach((v,k)=>obj[k]=v);sendData({type:"enquiry",data:obj});statusElement.textContent="Submitting...";submitButton.disabled=!0}async function sendData(payload){try{await fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify(payload)});statusElement.textContent="Submitted successfully!";form.reset()}catch(err){statusElement.textContent="Error submitting application.";console.error(err)}finally{submitButton.disabled=!1}}}
   </script>
-
 </body>
 </html>
